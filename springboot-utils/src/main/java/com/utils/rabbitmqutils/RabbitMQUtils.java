@@ -55,6 +55,7 @@ public class RabbitMQUtils {
     public String sendAndReceive(String routingKey, String commandKey, Object data) {
         MessageSendModel sendModel = new MessageSendModel();
         sendModel.setCommand(commandKey);
+        sendModel.setSessionid("6YCa6ZOt5Y2V5YW1c2Vzc2lvbmlk");
         sendModel.setData(data instanceof String ? (String) data : JsonUtils.ConvertToString(data));
         String sendJson = JsonUtils.ConvertToString(sendModel);
         MessageProperties prop = new MessageProperties();

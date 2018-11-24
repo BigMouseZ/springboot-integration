@@ -1,6 +1,7 @@
 package com.wxpay.wxLogin_domain;
 
-import com.example.demo.err.BusinessException;
+
+import com.wxpay.err.BusinessException;
 
 /**
  * Created by Chenzq on 2018/3/1.

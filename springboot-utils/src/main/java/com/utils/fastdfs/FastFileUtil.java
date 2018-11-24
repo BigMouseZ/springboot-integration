@@ -83,8 +83,8 @@ public class FastFileUtil {
     private String getResAccessUrl(StorePath storePath) {
         String fileUrl = null;
         if(storePath !=null){
-           // fileUrl = fdfsConfig.getResHost() + ":" + fdfsConfig.getStoragePort() + "/" + storePath.getFullPath();
-            fileUrl ="/" + storePath.getFullPath();
+            fileUrl = fdfsConfig.getResHost() + ":" + fdfsConfig.getStoragePort() + "/" + storePath.getFullPath();
+            //fileUrl ="/" + storePath.getFullPath();
         }
         return fileUrl;
     }

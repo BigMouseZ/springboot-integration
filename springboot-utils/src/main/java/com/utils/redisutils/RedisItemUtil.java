@@ -6,6 +6,7 @@ package com.utils.redisutils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisCallback;
@@ -21,7 +22,9 @@ import java.util.concurrent.TimeUnit;
  */
 @Component
 public class RedisItemUtil {
+    @Autowired
     private RedisTemplate<String,Object> redisTemplate;
+
     private static final Logger logger = LoggerFactory.getLogger(RedisItemUtil.class);
 
     /*

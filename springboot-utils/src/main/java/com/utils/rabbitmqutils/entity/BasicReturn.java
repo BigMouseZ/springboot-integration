@@ -1,6 +1,5 @@
-package com.minasocket.signalway.entity;
+package com.utils.rabbitmqutils.entity;
 
-import com.minasocket.signalway.entity.rabbitmq.ReturnQueuingObject;
 import com.utils.jsonutils.GsonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

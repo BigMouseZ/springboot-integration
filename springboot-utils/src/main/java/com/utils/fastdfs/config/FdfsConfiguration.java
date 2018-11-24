@@ -16,6 +16,4 @@ import org.springframework.jmx.support.RegistrationPolicy;
 
 public class FdfsConfiguration {
 
-
-
 }

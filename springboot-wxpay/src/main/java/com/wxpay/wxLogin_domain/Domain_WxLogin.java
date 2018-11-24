@@ -1,16 +1,14 @@
 package com.wxpay.wxLogin_domain;
 
 import com.alibaba.fastjson.JSON;
-import com.example.demo.err.BusinessException;
-import com.example.demo.util.HttpUtils;
-import com.example.demo.util.UUIDUtil;
+import com.utils.redisutils.RedisItemUtil;
+import com.wxpay.err.BusinessException;
+import com.wxpay.util.HttpUtils;
+import com.wxpay.util.UUIDUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Chenzq on 2018/3/6.
@@ -28,7 +26,7 @@ public class Domain_WxLogin implements IDomain_WxLogin {
     @Value("${wxapp.appKey}")
     private String appSecret;
     @Autowired
-    RedisTemplate<String,String> mRedisTemplate;
+    RedisItemUtil redisItemUtil;
     /**
      * 登陆
      * https://mp.weixin.qq.com/debug/wxadoc/dev/api/api-login.html#wxloginobject
@@ -73,13 +71,13 @@ public class Domain_WxLogin implements IDomain_WxLogin {
      * @param ttl 过期时间
      */
     private void saveLoginResponse(String sessionId,LoginResponseTo loginResponseTo, long ttl) {
-        mRedisTemplate.opsForValue().set("session_"+sessionId,JSON.toJSONString(loginResponseTo));
-        mRedisTemplate.expire("session_"+sessionId,ttl, TimeUnit.SECONDS);
+        redisItemUtil.setByKey("session_"+sessionId,JSON.toJSONString(loginResponseTo));
+        redisItemUtil.expire("session_"+sessionId,ttl);
 
     }
 
     private LoginResponseTo loadLoginInfo(String sessionId) {
-        return JSON.parseObject(mRedisTemplate.opsForValue().get("session_" + sessionId), LoginResponseTo.class);
+        return JSON.parseObject(redisItemUtil.getByKey("session_" + sessionId), LoginResponseTo.class);
     }
 
     private String creatSessionId() {
