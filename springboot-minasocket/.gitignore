@@ -1,6 +1,6 @@
 /target/
 !.mvn/wrapper/maven-wrapper.jar
-
+/LOG_PATH_IS_UNDEFINED/
 ### STS ###
 .apt_generated
 .classpath
