@@ -15,7 +15,7 @@ import javax.servlet.ServletContext;
  *
  */
 @Configuration
-public class ContextBase {
+public class SpringContextBase {
 	@Autowired
     WebApplicationContext webApplicationContext;
 

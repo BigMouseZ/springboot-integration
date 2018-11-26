@@ -8,10 +8,10 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class FdfsConfig {
-    @Value("${fdfs.resHost}")
+    @Value("${fdfs.reshost}")
     private String resHost;
 
-    @Value("${fdfs.storagePort}")
+    @Value("${fdfs.storageport}")
     private String storagePort;
 
     public String getResHost() {

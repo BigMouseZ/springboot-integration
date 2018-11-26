@@ -8,11 +8,34 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
+        <module>springboot-utils</module>
         <module>springboot-minasocket</module>
         <module>springboot-websocket</module>
-        <module>springboot-utils</module>
         <module>springboot-wxpay</module>
     </modules>
-
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.integration</groupId>
+                <artifactId>springboot-minasocket</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.integration</groupId>
+                <artifactId>springboot-utils</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.integration</groupId>
+                <artifactId>springboot-websocket</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.integration</groupId>
+                <artifactId>springboot-wxpay</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>

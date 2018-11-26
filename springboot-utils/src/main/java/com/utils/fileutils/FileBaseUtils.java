@@ -1,7 +1,7 @@
 package com.utils.fileutils;
 
+import com.utils.springcontext.SpringContextBase;
 import com.utils.springcontext.SpringContextUtils;
-import com.utils.springcontext.ContextBase;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
@@ -19,7 +19,7 @@ import java.io.OutputStream;
  */
 public class FileBaseUtils {
 
-	private static ContextBase contextBase = (ContextBase) SpringContextUtils.getBean(ContextBase.class);
+	private static SpringContextBase springContextBase = (SpringContextBase) SpringContextUtils.getBean(SpringContextBase.class);
 
 	/**
 	 * springmvc专用的保存文件上传
@@ -50,9 +50,9 @@ public class FileBaseUtils {
 	/**
 	 * 保存文件
 	 * 
-	 * @param input
+	 * @param sourceFileFullPath
 	 *            想要保存的源文件全路径
-	 * @param newFileFullName
+	 * @param targetFileFullPath
 	 *            想要保存的目标文件全路径
 	 * @return 成功返回true,失败则抛出IOException
 	 * @throws IOException
@@ -81,7 +81,7 @@ public class FileBaseUtils {
 	/**
 	 * 保存文件
 	 * @param input	想要保存的文件流
-	 * @param newFileFullName 不能为空。定义要保存的完全路径名。
+	 * @param fileFullPath 不能为空。定义要保存的完全路径名。
 	 * @return  成功返回true,失败则抛出IOException
 	 * @throws IOException
 	 */
@@ -113,7 +113,7 @@ public class FileBaseUtils {
 	 * @throws IOException 
 	 */
 	public static String createDir(String dir) throws IOException {
-		String webRootPath = contextBase.getWebRootAbsolutePath();
+		String webRootPath = springContextBase.getWebRootAbsolutePath();
 
 		File dirPath = new File(webRootPath + dir);
 		if (!dirPath.exists()) {
@@ -125,12 +125,12 @@ public class FileBaseUtils {
 	
 	/**
 	 * 取得此目录相对于webRoot的绝对路径，如果此路径不存在此创建此目录
-	 * @param filePath 文件相对路径, 文件路径/文件夹路径
+	 * @param file 文件相对路径, 文件路径/文件夹路径
 	 * @return 绝对路径
 	 * @throws IOException 
 	 */
 	public static String getAbsoluteDir(String file) throws IOException {
-		String webRootPath = new ContextBase().getWebRootAbsolutePath();
+		String webRootPath = new SpringContextBase().getWebRootAbsolutePath();
 		//String webRootPath = "";
 		String filePath = null;
 		
