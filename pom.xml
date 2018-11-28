@@ -12,30 +12,8 @@
         <module>springboot-minasocket</module>
         <module>springboot-websocket</module>
         <module>springboot-wxpay</module>
+        <module>springboot-lombok</module>
     </modules>
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>com.integration</groupId>
-                <artifactId>springboot-minasocket</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.integration</groupId>
-                <artifactId>springboot-utils</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.integration</groupId>
-                <artifactId>springboot-websocket</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.integration</groupId>
-                <artifactId>springboot-wxpay</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+
 
 </project>

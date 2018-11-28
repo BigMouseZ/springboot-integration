@@ -1,5 +1,6 @@
 # Created by .ignore support plugin (hsz.mobi)
-
+/springbootutil/
+/LOG_PATH_IS_UNDEFINED/
 ### IntelliJ IDEA ###
 .idea
 *.iws
