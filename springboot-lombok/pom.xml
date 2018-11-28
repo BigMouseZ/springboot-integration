@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.integration</groupId>
-	<artifactId>springboot-websocket</artifactId>
+	<artifactId>springboot-lombok</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>springboot-websocket</name>
-	<description>Demo project for Spring Boot WebSocket</description>
+	<name>springboot-lombok</name>
+	<description>Demo project for Spring Boot Lombok Test</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -26,27 +26,14 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.integration</groupId>
-			<artifactId>springboot-utils</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
+			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-websocket</artifactId>
-		</dependency>
+
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>fastjson</artifactId>
-			<version>1.2.44</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
