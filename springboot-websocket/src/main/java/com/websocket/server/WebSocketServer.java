@@ -4,6 +4,7 @@ import com.utils.jsonutils.GsonUtil;
 import com.websocket.manage.LoginNameSessionIDMap;
 import com.websocket.manage.WebSocketSessionMap;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.websocket.OnClose;
@@ -22,6 +23,10 @@ import java.util.Map;
 @ServerEndpoint(value = "/websocket")
 @Component
 public class WebSocketServer {
+    @Value("${mina.socket.host}")
+    private String host;
+    @Value("${mina.socket.port}")
+    private int port;
     /**
      * 连接建立成功调用的方法*/
     @OnOpen
