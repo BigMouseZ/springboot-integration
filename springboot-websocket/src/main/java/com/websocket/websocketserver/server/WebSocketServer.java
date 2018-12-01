@@ -1,8 +1,8 @@
-package com.websocket.server;
+package com.websocket.websocketserver.server;
 
 import com.utils.jsonutils.GsonUtil;
-import com.websocket.manage.LoginNameSessionIDMap;
-import com.websocket.manage.WebSocketSessionMap;
+import com.websocket.websocketserver.manage.LoginNameSessionIDMap;
+import com.websocket.websocketserver.manage.WebSocketSessionMap;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -46,6 +46,7 @@ public class WebSocketServer {
         log.info("WebSocket接收的字符消息[" + message + "].");
         log.info("sessionid="+session.getId());
         if("心跳".equals(message)){
+            System.out.println(host);
             log.info("收到ws心跳");
             return;
         }
@@ -59,7 +60,7 @@ public class WebSocketServer {
         * */
         Map<String, Object> map= GsonUtil.changeGsonToMaps(message);
         if("WS.LOGIN".equals(map.get("command"))){
-            //登录，根据sessionid去缓存拿 loginname
+            //登录，根据sessionid去缓存拿 loginname 或者在params中传递过来。
             String loginname = "loginname";
             LoginNameSessionIDMap.instance().put(loginname,session.getId());
         }

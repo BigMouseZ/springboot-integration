@@ -1,4 +1,4 @@
-package com.websocket.manage;
+package com.websocket.websocketserver.manage;
 
 import javax.websocket.Session;
 import java.util.Collection;

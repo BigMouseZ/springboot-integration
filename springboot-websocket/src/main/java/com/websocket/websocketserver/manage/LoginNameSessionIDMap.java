@@ -1,4 +1,4 @@
-package com.websocket.manage;
+package com.websocket.websocketserver.manage;
 
 import java.util.Collection;
 import java.util.Map;

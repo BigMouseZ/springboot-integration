@@ -13,6 +13,7 @@
         <module>springboot-websocket</module>
         <module>springboot-wxpay</module>
         <module>springboot-lombok</module>
+        <module>springboot-mybatis</module>
     </modules>
 
 

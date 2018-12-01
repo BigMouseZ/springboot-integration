@@ -1,8 +1,8 @@
-package com.websocket.controller;
+package com.websocket.websocketserver.controller;
 
-import com.websocket.manage.LoginNameSessionIDMap;
-import com.websocket.manage.WebSocketSessionMap;
-import com.websocket.server.WebSocketServer;
+import com.websocket.websocketserver.manage.LoginNameSessionIDMap;
+import com.websocket.websocketserver.manage.WebSocketSessionMap;
+import com.websocket.websocketserver.server.WebSocketServer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
