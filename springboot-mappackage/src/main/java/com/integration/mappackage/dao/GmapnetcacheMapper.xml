@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.integration.mappackage.dao.GmapnetcacheMapper">
+  <resultMap id="BaseResultMap" type="com.integration.mappackage.entity.Gmapnetcache">
+    <id column="Type" jdbcType="INTEGER" property="type" />
+    <id column="Zoom" jdbcType="INTEGER" property="zoom" />
+    <id column="X" jdbcType="INTEGER" property="x" />
+    <id column="Y" jdbcType="INTEGER" property="y" />
+    <result column="Tile" jdbcType="LONGVARBINARY" property="tile" />
+  </resultMap>
+  <select id="selectAll" resultMap="BaseResultMap" parameterType="com.integration.mappackage.entity.QueryInfo">
+    select Type, Zoom, X, Y, Tile
+    from gmapnetcache
+     where Type = #{map_type,jdbcType=INTEGER}
+      and Zoom >= #{zoom_min,jdbcType=INTEGER}
+      <![CDATA[
+      and Zoom <= #{zoom_max,jdbcType=INTEGER}
+      ]]>
+      ORDER BY zoom,x,y
+  </select>
+</mapper>

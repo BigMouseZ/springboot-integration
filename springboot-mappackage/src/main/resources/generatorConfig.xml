@@ -11,16 +11,16 @@
             <property name="suppressAllComments" value="true"/>
         </commentGenerator>
         <!--需要配置数据库连接-->
-        <jdbcConnection driverClass="org.postgresql.Driver"
-                        connectionURL="jdbc:postgresql://120.79.241.172:5432/springboot_master"
-                        userId="pgsql"
-                        password="pgsql">
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/raster_maps_guangxi_s31s40"
+                        userId="ZhangGang"
+                        password="123@abc">
         </jdbcConnection>
         <javaTypeResolver >
             <property name="forceBigDecimals" value="false" />
         </javaTypeResolver>
         <!--指定entity生成的位置-->
-        <javaModelGenerator targetPackage="com.mybatis.dao.master.testdatetime" targetProject="./src/main/java">
+        <javaModelGenerator targetPackage="com.integration.mappackage.dao" targetProject="./src/main/java">
             <!-- enableSubPackages:是否让schema作为包的后缀 -->
             <property name="enableSubPackages" value="false" />
             <!-- 从数据库返回的值被清理前后的空格 -->
@@ -28,15 +28,15 @@
         </javaModelGenerator>
 
         <!--sql映射文件生成的位置 mapper.xml-->
-        <sqlMapGenerator targetPackage="com.mybatis.dao.master.testdatetime"  targetProject="./src/main/java">
+        <sqlMapGenerator targetPackage="com.integration.mappackage.dao"  targetProject="./src/main/java">
             <property name="enableSubPackages" value="false" />
         </sqlMapGenerator>
 
         <!--指定DaoMapper生成的位置 mapper.java-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.mybatis.dao.master.testdatetime" targetProject="./src/main/java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.integration.mappackage.dao" targetProject="./src/main/java">
             <property name="enableSubPackages" value="false" />
         </javaClientGenerator>
         <!--table是指定每个表的生成策略-->
-        <table tableName="test_datetime" ></table>
+        <table tableName="gmapnetcache" ></table>
     </context>
 </generatorConfiguration>

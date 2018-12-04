@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.integration</groupId>
-	<artifactId>springboot-mybatis</artifactId>
+	<artifactId>springboot-mappackage</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>springboot-mybatis</name>
+	<name>springboot-mappackage</name>
 	<description>Demo project for Spring Boot</description>
 
 	<parent>
@@ -88,9 +88,9 @@
 				</configuration>
 				<dependencies>
 					<dependency>
-						<groupId>org.postgresql</groupId>
-						<artifactId>postgresql</artifactId>
-						<version>42.2.2</version>
+						<groupId>mysql</groupId>
+						<artifactId>mysql-connector-java</artifactId>
+						<version>5.1.46</version>
 					</dependency>
 				</dependencies>
 			</plugin>

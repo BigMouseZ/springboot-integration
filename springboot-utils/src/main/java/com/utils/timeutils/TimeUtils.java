@@ -37,10 +37,8 @@ public class TimeUtils {
             SimpleDateFormat formatter = new SimpleDateFormat(format);
             return formatter.format(date);
         } else {
-
             return null;
         }
-
     }
 
     public static String getCurrentTimeString() {
