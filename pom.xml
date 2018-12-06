@@ -16,6 +16,7 @@
         <module>springboot-mybatis</module>
         <module>springboot-mapserver</module>
         <module>springboot-mappackage</module>
+        <module>springboot-mail</module>
     </modules>
 
 
