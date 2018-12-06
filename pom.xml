@@ -14,6 +14,8 @@
         <module>springboot-wxpay</module>
         <module>springboot-lombok</module>
         <module>springboot-mybatis</module>
+        <module>springboot-mapserver</module>
+        <module>springboot-mappackage</module>
     </modules>
 
 

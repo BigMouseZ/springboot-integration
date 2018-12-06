@@ -1,16 +1,16 @@
 package com.integration.mapserver;
 
 
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.stereotype.Component;
+import org.springframework.util.ResourceUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import javax.imageio.ImageIO;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
-import javax.servlet.annotation.WebServlet;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.BufferedInputStream;
@@ -23,36 +23,26 @@ import java.util.Properties;
 /**
  * Created by Admin on 2017/3/16.
  */
-@WebServlet("/MapInit")
-public class MapInit implements ServletContextListener {
-    ServletContext servletContext;
-
+@Component
+public class MapInit implements  ApplicationListener<ContextRefreshedEvent>  {
     @Override
-    public void contextInitialized(ServletContextEvent sce) {
-        this.servletContext = sce.getServletContext();
-        boolean result = this._mapInit();
-        if (result == true) {
+    public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+        if (_mapInit()) {
             System.out.println("地图初始化成功");
         } else {
             System.out.println("无需地图初始化或地图初始化失败");
         }
     }
-
-    @Override
-    public void contextDestroyed(ServletContextEvent sce) {
-
-    }
-
     private boolean _mapInit() {
         try {
             if (Map.nomapImg == null) {
-                File file = new File(this.servletContext.getRealPath("/") + "/images/nomap.jpg");
-                File file2 = new File(this.servletContext.getRealPath("/") + "/images/nomaptip.jpg");
+                File file = ResourceUtils.getFile("classpath:images/nomap.jpg");
+                File file2 = ResourceUtils.getFile("classpath:images/nomap1.jpg");
                 Map.nomapImg = ImageIO.read(file);
                 Map.nomapTipImg = ImageIO.read(file2);
             }
-
-            InputStream pros = new BufferedInputStream(new FileInputStream(this.servletContext.getRealPath("/") + "/WEB-INF/classes/mapconfig.properties"));
+            File file3 = ResourceUtils.getFile("classpath:application.properties");
+            InputStream pros = new BufferedInputStream(new FileInputStream(file3));
             Properties prop = new Properties();
             prop.load(pros);
             pros.close();
@@ -110,16 +100,10 @@ public class MapInit implements ServletContextListener {
                     Map.mapIdx.put(map, tileIdx);
                 }
             }
-
-          /*  Enumeration maps = prop.propertyNames();
-            while (maps.hasMoreElements()) {
-
-            }*/
             return true;
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;
         }
-
     }
 }
