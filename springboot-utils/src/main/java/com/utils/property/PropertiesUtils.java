@@ -21,6 +21,15 @@ public class PropertiesUtils {
     public static Properties load(String filePath){
         Properties properties = new Properties();
         try {
+            //读取外部配置文件加载方式。
+         /*   File file = new File(filePath);
+            FileInputStream fis = new FileInputStream(file);
+            properties.load(fis);
+            fis.close();*/
+            //读取内部配置文件加载方式
+            /*InputStreamReader isr=new InputStreamReader(new FileInputStream(new ClassPathResource(filePath).getFile()),"utf-8");
+            properties.load(isr);
+            isr.close();*/
             //InputStream oo = Object.class.getResourceAsStream(filePath);
             InputStream fs=new FileInputStream(new ClassPathResource(filePath).getFile());
             properties.load(fs);
