@@ -1,6 +1,6 @@
 package com.lombok;
 
-import com.lombok.at_Getter_Setter.User;
+import com.lombok.at_Data.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,6 +13,7 @@ public class SpringbootLombokApplicationTests {
 	@Test
 	public void contextLoads() {
 		User  aa = new User();
+		System.out.println(aa.toString());
 	}
 
 }
