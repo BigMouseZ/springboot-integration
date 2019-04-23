@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 /**
  * Created by ZhangGang on 2018/7/17.
  */
+
 @Component
 public class ApplicationStartup implements ApplicationListener<ContextRefreshedEvent> {
     private  static final Logger logger = LoggerFactory.getLogger(ApplicationStartup.class);
