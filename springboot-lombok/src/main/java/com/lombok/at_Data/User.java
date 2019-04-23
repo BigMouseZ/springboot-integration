@@ -11,6 +11,8 @@ public class User {
     private Long id;
     private String phone;
     private Integer status;
+
+
 }
 
 

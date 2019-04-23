@@ -25,7 +25,7 @@ public class ServiceStartListener implements ApplicationListener<ContextRefreshe
         if (event.getApplicationContext().getParent() == null) {
             logger.info("开始初始化数据操作");
             //初始化线程池
-            initThreadPool();
+          //  initThreadPool();
         }
 
     }

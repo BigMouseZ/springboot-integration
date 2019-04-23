@@ -19,8 +19,6 @@ public class FastDFSTest {
     private FastFileUtil fastFileUtil;
     @Test
     public void setFastDFSTest(){
-
         System.out.println("上传文件路径："+ fastFileUtil.uploadFile(new File("E:\\20171101194330.jpg")));
-
     }
 }
