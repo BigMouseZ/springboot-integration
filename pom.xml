@@ -17,6 +17,8 @@
         <module>springboot-mapserver</module>
         <module>springboot-mappackage</module>
         <module>springboot-mail</module>
+        <module>springboot-imagematch</module>
+        <module>springboot-lambda</module>
     </modules>
 
 

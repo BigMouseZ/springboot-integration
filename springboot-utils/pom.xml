@@ -87,8 +87,47 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.44</version>
         </dependency>
-    </dependencies>
+        <!--poi-->
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.16</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>3.16</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml-schemas</artifactId>
+            <version>3.16</version>
+        </dependency>
+        <!--poi-->
+        <!-- easyexcel 	-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
+            <version>1.1.0</version>
+        </dependency>
 
+        <!-- easyexcel 	-->
+        <!--quartz依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-quartz</artifactId>
+        </dependency>
+    </dependencies>
+  <!--  <build>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <excludes>
+                    <exclude>**/*.xlsx</exclude>
+                </excludes>
+            </resource>
+        </resources>
+    </build>-->
   <!--  <build>
         <plugins>
             <plugin>
