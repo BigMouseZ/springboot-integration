@@ -2,11 +2,7 @@ package com.utils.quartz.config;
 
 import com.utils.quartz.GpsSyncDeleteQuartzJob;
 import com.utils.quartz.GpsSyncQuartzJob;
-import org.quartz.CronScheduleBuilder;
-import org.quartz.JobBuilder;
-import org.quartz.JobDetail;
-import org.quartz.Trigger;
-import org.quartz.TriggerBuilder;
+import org.quartz.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,27 +15,31 @@ import org.springframework.context.annotation.Configuration;
 public class QuartzConfig {
     @Value("${quartz.GpsSyncTaskCronSchedule}")
     private String GpsSyncTaskCronSchedule;
-    @Value("${quartz.GpsSyncDeleteTaskCronSchedule}")
-    private String GpsSyncDeleteTaskCronSchedule;
 
     @Bean
     public JobDetail GpsSyncTaskDetail() {
         return JobBuilder.newJob(GpsSyncQuartzJob.class).withIdentity("GpsSyncTask").withDescription("同步GPS定时任务").storeDurably().build();
     }
+
     @Bean
-    public Trigger GpsSyncTaskTrigger() {
+    public CronTrigger GpsSyncTaskTrigger() {
         CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(GpsSyncTaskCronSchedule);
-        return TriggerBuilder.newTrigger().forJob(GpsSyncTaskDetail())
-                .withIdentity("GpsSyncTask").withDescription("同步GPS定时任务").withSchedule(scheduleBuilder).build();
+        return null;
+//        return TriggerBuilder.newTrigger().forJob(GpsSyncTaskDetail())
+//                .withIdentity("GpsSyncTask").withDescription("同步GPS定时任务").withSchedule(scheduleBuilder).build();
     }
+
     @Bean
-    public JobDetail GpsSyncDeleteTaskDetail() {
-        return JobBuilder.newJob(GpsSyncDeleteQuartzJob.class).withIdentity("GpsSyncDeleteTask").withDescription("GPS数据删除定时任务").storeDurably().build();
+    public JobDetail GpsSyncTaskDetail2() {
+        return JobBuilder.newJob(GpsSyncDeleteQuartzJob.class).withIdentity("GpsSyncTask").withDescription("同步GPS定时任务").storeDurably().build();
     }
+
     @Bean
-    public Trigger GpsSyncDeleteTaskTrigger() {
-        CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule(GpsSyncDeleteTaskCronSchedule);
-        return TriggerBuilder.newTrigger().forJob(GpsSyncDeleteTaskDetail())
-                .withIdentity("GpsSyncDeleteTask").withDescription("GPS数据删除定时任务").withSchedule(scheduleBuilder).build();
+    public SimpleTrigger GpsSyncTaskTrigger2() {
+        // Simple类型：可设置时间间隔、是否重复、触发频率（misfire机制）等
+        SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder.simpleSchedule()
+                .withIntervalInSeconds(5).repeatForever();
+        return TriggerBuilder.newTrigger().forJob(GpsSyncTaskDetail2())
+                .withIdentity("GpsSyncTask2").withDescription("同步GPS定时任务2").withSchedule(scheduleBuilder).build();
     }
 }

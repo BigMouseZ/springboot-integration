@@ -1,5 +1,6 @@
 package com.integration.basic;
 
+
 import lombok.Data;
 
 import java.io.Serializable;
