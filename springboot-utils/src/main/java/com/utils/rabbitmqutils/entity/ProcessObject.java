@@ -8,7 +8,6 @@ import com.google.gson.GsonBuilder;
  * Created by Admin on 2016/12/16.
  */
 public class ProcessObject {
-
     private String strReturn;
     private boolean isReturn;
 
