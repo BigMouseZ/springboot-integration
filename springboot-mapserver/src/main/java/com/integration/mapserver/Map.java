@@ -29,6 +29,7 @@ import java.util.Properties;
 /**
  * Created by LiYu on 2017/3/15.
  */
+//@CrossOrigin
 @WebServlet("/map.ashx")
 public class Map extends HttpServlet {
     public static HashMap<String, HashMap<String, MapTile>> mapIdx = new HashMap<String, HashMap<String, MapTile>>();

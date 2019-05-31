@@ -21,7 +21,17 @@ public class Controller {
      * @return strung。
      **/
     @RequestMapping(value = "/hello",method = RequestMethod.POST)
-    public String helloController(String reqString) throws IOException {
+    public String helloController( String puid,String chan,
+                                   String zptime,String faceid,
+                                   String acescore,String x,
+                                   String y,String width,
+                                   String height,String age,
+                                   String sex,String glass,
+                                  String end,String stay,
+                                   String picnum,String gpsEW,
+                                   String longitude,String gpsNS,
+                                   String latitude,String remark
+                                  ) throws IOException {
        /*   级别依次为【从高到低】：FATAL > ERROR > WARN > INFO > DEBUG > TRACE  */
         logger.debug("debug 日志测试！helloController");
         logger.info("info 日志测试！helloController");
