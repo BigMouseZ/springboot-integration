@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.dao.master.testdatetime.TestDatetimeMapper">
+  <resultMap id="BaseResultMap" type="com.mybatis.dao.master.testdatetime.TestDatetime">
+    <result column="id" jdbcType="VARCHAR" property="id" />
+    <result column="test_date" jdbcType="DATE" property="testDate" />
+    <result column="test_time" jdbcType="TIME" property="testTime" />
+    <result column="test_datetime" jdbcType="TIMESTAMP" property="testDatetime" />
+  </resultMap>
+  <insert id="insert" parameterType="com.mybatis.dao.master.testdatetime.TestDatetime">
+    insert into test_datetime (id, test_date, test_time, 
+      test_datetime)
+    values (#{id,jdbcType=VARCHAR}, #{testDate,jdbcType=DATE}, #{testTime,jdbcType=TIME}, 
+      #{testDatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, test_date, test_time, test_datetime
+    from test_datetime
+  </select>
+</mapper>

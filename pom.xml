@@ -8,10 +8,19 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
+        <module>springboot-utils</module>
         <module>springboot-minasocket</module>
         <module>springboot-websocket</module>
-        <module>springboot-utils</module>
         <module>springboot-wxpay</module>
+        <module>springboot-lombok</module>
+        <module>springboot-mybatis</module>
+        <module>springboot-mapserver</module>
+        <module>springboot-mappackage</module>
+        <module>springboot-mail</module>
+        <module>springboot-imagematch</module>
+        <module>springboot-lambda</module>
+        <module>springboot-webservice</module>
+        <module>springboot-javapattern</module>
     </modules>
 
 
