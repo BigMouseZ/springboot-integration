@@ -13,7 +13,7 @@ import javax.xml.ws.Endpoint;
 
 
 
-
+//@Configuration
 public class CxfConfig {
 
     @Bean
