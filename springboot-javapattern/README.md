@@ -28,6 +28,145 @@
 	为什么叫最少知道原则，就是说：一个实体应当尽量少的与其他实体之间发生相互作用，使得系统功能模块相对独立。
 
 * 合成复用原则（Composite Reuse Principle）
-	原则是尽量使用合成/聚合的方式，而不是使用继承。
-	
-	★☆
+	原则是尽量使用合成/聚合的方式，而不是使用继承。  
+	rowspan：规定单元格可横跨的行数。横跨几行属性值就写几，如上图中横跨7行，则rowspan=”7”  
+    colspan：规定单元格可纵深的列数。
+##表1  常用设计模式一览表  
+<table  style="width: 1000px;  ">
+    <tr>
+        <td width=10%  > 类型  </td>
+        <td width=10% >模式名称</td>
+        <td width=10% > 学习难度</td>
+        <td width=10% > 使用频率</td>
+    </tr>
+    <tr>
+        <td rowspan="7">创建型模式  <br> Creational Pattern </td>
+    </tr>
+    <tr>
+        <td>单例模式 <br>  Singleton Pattern  </td>
+        <td> <font color=red >★☆☆☆☆</font></td>
+        <td> <font color=red >★★★★☆</td>
+    </tr>
+     <tr>
+            <td>简单工厂模式  <br>  Simple Factory Pattern  </td>
+            <td> <font color=red > ★★☆☆☆</td>
+            <td> <font color=red >★★★☆☆</td>
+     </tr>
+<tr>
+        <td>工厂方法模式 <br>  Factory Method Pattern  </td>
+        <td> <font color=red > ★★☆☆☆</td>
+        <td> <font color=red >★★★★★</td>
+    </tr>
+ <tr>
+        <td>抽象工厂模式 <br>  Abstract Factory Pattern  </td>
+        <td> <font color=red > ★★★★☆</td>
+        <td> <font color=red >★★★★★</td>
+    </tr>
+ <tr>
+        <td>原型模式 <br>  Prototype Pattern  </td>
+        <td> <font color=red > ★★★☆☆</td>
+        <td> <font color=red >★★★☆☆</td>
+    </tr>
+ <tr>
+        <td>建造者模式 <br>  Builder Pattern  </td>
+        <td> <font color=red > ★★★★☆</td>
+        <td> <font color=red >★★☆☆☆</td>
+    </tr>
+  <tr>
+         <td rowspan="8">结构型模式  <br> Structural Pattern </td>
+     </tr>
+ <tr>
+        <td>适配器模式 <br>  Adapter Pattern  </td>
+        <td> <font color=red > ★★☆☆☆</td>
+        <td> <font color=red >★★★★☆</td>
+    </tr>
+ <tr>
+         <td> 桥接模式 <br>  Bridge Pattern  </td>
+         <td> <font color=red > ★★★☆☆</td>
+         <td> <font color=red >★★★☆☆</td>
+     </tr>
+  <tr>
+          <td>组合模式 <br>  Composite Pattern  </td>
+          <td> <font color=red > ★★★☆☆</td>
+          <td> <font color=red >★★★★☆</td>
+      </tr>
+  <tr>
+          <td>装饰模式 <br>  Decorator Pattern  </td>
+          <td> <font color=red > ★★★☆☆</td>
+          <td> <font color=red >★★★☆☆</td>
+      </tr>
+  <tr>
+          <td>外观模式 <br>  Façade Pattern  </td>
+          <td> <font color=red > ★☆☆☆☆</td>
+          <td> <font color=red >★★★★★</td>
+      </tr>
+  <tr>
+           <td>享元模式 <br> Flyweight Pattern  </td>
+           <td> <font color=red > ★★★★☆</td>
+           <td> <font color=red >★☆☆☆☆</td>
+       </tr>
+  <tr>
+           <td>代理模式 <br>  Proxy Pattern  </td>
+           <td> <font color=red > ★★★☆☆</td>
+           <td> <font color=red >★★★★☆</td>
+       </tr>
+  <tr>
+           <td rowspan="12">行为型模式 <br>  Behavioral Pattern  </td>
+       </tr>
+  <tr>
+            <td>职责链模式 <br>   Chain of Responsibility Pattern  </td>
+            <td> <font color=red > ★★★☆☆</td>
+            <td> <font color=red >★★☆☆☆</td>
+        </tr>
+  <tr>
+            <td>命令模式 <br>  Command Pattern  </td>
+            <td> <font color=red > ★★★☆☆</td>
+            <td> <font color=red > <font color=red >★★★★☆</td>
+        </tr>
+   <tr>
+             <td>解释器模式 <br>   Interpreter Pattern  </td>
+             <td> <font color=red > ★★★★★</td>
+             <td> <font color=red >★☆☆☆☆</td>
+         </tr>
+   <tr>
+             <td>迭代器模式 <br>  Iterator Pattern  </td>
+             <td> <font color=red > ★★★☆☆</td>
+             <td> <font color=red >★★★★★</td>
+         </tr>
+  <tr>
+              <td>中介者模式 <br>  Mediator Pattern  </td>
+               <td> <font color=red > ★★★☆☆</td>
+               <td> <font color=red >★★☆☆☆</td>
+          </tr>
+  <tr>
+              <td>备忘录模式 <br>  Memento Pattern  </td>
+               <td> <font color=red > ★★☆☆☆</td>
+               <td> <font color=red >★★☆☆☆</td>
+          </tr>
+ <tr>
+             <td>观察者模式 <br>  Observer Pattern  </td>
+              <td> <font color=red > ★★★☆☆</td>
+              <td> <font color=red >★★★★★</td>
+         </tr>
+ <tr>
+              <td>状态模式 <br>  State Pattern  </td>
+              <td> <font color=red > ★★★☆☆</td>
+              <td> <font color=red >★★★☆☆</td>
+          </tr>
+  <tr>
+               <td>策略模式 <br>  Strategy Pattern  </td>
+               <td> <font color=red > ★☆☆☆☆</td>
+               <td> <font color=red >★★★★☆</td>
+           </tr>
+  <tr>
+               <td>模板方法模式 <br>  Template Method Pattern  </td>
+               <td> <font color=red > ★★☆☆☆</td>
+               <td> <font color=red >★★★☆☆</td>
+           </tr>
+    <tr>
+                  <td>访问者模式 <br> Visitor Pattern  </td>
+                  <td> <font color=red > ★★★★☆</td>
+                  <td> <font color=red >★☆☆☆☆</td>
+              </tr>
+              
+</table>
