@@ -1,30 +1,19 @@
 package com.integration.structure.proxy.client;
 
-import com.integration.create.builder.Actor;
-import com.integration.create.builder.ActorBuilder;
-import com.integration.create.builder.ActorController;
-import com.integration.create.builder.impl.AngelBuilder;
+import com.integration.structure.proxy.Searcher;
+import com.integration.structure.proxy.impl.ProxySearcher;
 
 /**
  * Created by ZhangGang on 2019/6/4.
  */
 public class Client {
     public static void main(String[] args) {
-        ActorBuilder ab = new AngelBuilder();//针对抽象建造者编程
-                //(ActorBuilder) XMLUtil.getBean(); // 反射生成具体建造者对象
-        ActorController ac = new ActorController();
-       // Actor actor = ac.construct(ab); //通过指挥者创建完整的建造者对象
-        Actor actor = ab.construct();  //由建造者直接完成指挥者工作
-        String type = actor.getType();
-
-        System.out.println(type + "的外观：");
-
-        System.out.println("性别：" + actor.getSex());
-
-        System.out.println("面容：" + actor.getFace());
-
-        System.out.println("服装：" + actor.getCostume());
-
-        System.out.println("发型：" + actor.getHairstyle());
+        //读取配置文件
+     //   String proxy = ConfigurationManager.AppSettings["proxy"];
+        //反射生成对象，针对抽象编程，客户端无须分辨真实主题类和代理类
+        Searcher searcher = new ProxySearcher();
+                //(Searcher)Assembly.Load("ProxySample").CreateInstance(proxy);
+        String result = searcher.DoSearch("杨过", "玉女心经");
+        System.out.println("执行完毕:"+result);
     }
 }

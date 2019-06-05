@@ -22,7 +22,7 @@
             <td> <font color=red > <font color=red >★★★★☆</td>
         </tr>
    <tr>
-             <td>解释器模式 <br>   Interpreter Pattern  </td>
+             <td><a href="#jump">解释器模式</a>  <br>   Interpreter Pattern  </td>
              <td> <font color=red > ★★★★★</td>
              <td> <font color=red >★☆☆☆☆</td>
          </tr>
@@ -83,7 +83,7 @@
   
   ---
 
-### 命令模式(Command Pattern)：
+### 命令模式(Command Pattern)： 
   将一个请求封装为一个对象，从而让我们可用不同的请求对客户进行参数化；对请求排队或者记录请求日志，以及支持可撤销的操作。
   命令模式是一种对象行为型模式，其别名为动作(Action)模式或事务(Transaction)模式。
 
@@ -99,7 +99,7 @@
    
    ---
 
-###  解释器模式(Interpreter Pattern)：
+###  <span id = "jump">解释器模式(Interpreter Pattern)：</span> 
 定义一个语言的文法，并且建立一个解释器来解释该语言中的句子，这里的“语言”是指使用规定格式和语法的代码。解释器模式是一种类行为型模式。
 
 在解释器模式结构图中包含如下几个角色：

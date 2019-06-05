@@ -1,30 +1,41 @@
 package com.integration.action.iterator.client;
 
-import com.integration.create.builder.Actor;
-import com.integration.create.builder.ActorBuilder;
-import com.integration.create.builder.ActorController;
-import com.integration.create.builder.impl.AngelBuilder;
+import com.integration.action.iterator.AbstractIterator;
+import com.integration.action.iterator.AbstractObjectList;
+import com.integration.action.iterator.impl.ProductList;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by ZhangGang on 2019/6/4.
  */
 public class Client {
     public static void main(String[] args) {
-        ActorBuilder ab = new AngelBuilder();//针对抽象建造者编程
-                //(ActorBuilder) XMLUtil.getBean(); // 反射生成具体建造者对象
-        ActorController ac = new ActorController();
-       // Actor actor = ac.construct(ab); //通过指挥者创建完整的建造者对象
-        Actor actor = ab.construct();  //由建造者直接完成指挥者工作
-        String type = actor.getType();
+        List products = new ArrayList();
+        products.add("倚天剑");
+        products.add("屠龙刀");
+        products.add("断肠草");
+        products.add("葵花宝典");
+        products.add("四十二章经");
 
-        System.out.println(type + "的外观：");
+        AbstractObjectList list;
+        AbstractIterator iterator;
 
-        System.out.println("性别：" + actor.getSex());
+        list = new ProductList(products); //创建聚合对象
+        iterator = list.createIterator();    //创建迭代器对象
 
-        System.out.println("面容：" + actor.getFace());
-
-        System.out.println("服装：" + actor.getCostume());
-
-        System.out.println("发型：" + actor.getHairstyle());
+        System.out.println("正向遍历：");
+        while (!iterator.isLast()) {
+            System.out.print(iterator.getNextItem() + "，");
+            iterator.next();
+        }
+        System.out.println();
+        System.out.println("-----------------------------");
+        System.out.println("逆向遍历：");
+        while (!iterator.isFirst()) {
+            System.out.print(iterator.getPreviousItem() + "，");
+            iterator.previous();
+        }
     }
 }

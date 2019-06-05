@@ -1,30 +1,38 @@
 package com.integration.action.mediator.client;
 
-import com.integration.create.builder.Actor;
-import com.integration.create.builder.ActorBuilder;
-import com.integration.create.builder.ActorController;
-import com.integration.create.builder.impl.AngelBuilder;
+import com.integration.action.mediator.impl.Button;
+import com.integration.action.mediator.impl.ComboBox;
+import com.integration.action.mediator.impl.ConcreteMediator;
+import com.integration.action.mediator.impl.List;
+import com.integration.action.mediator.impl.TextBox;
 
 /**
  * Created by ZhangGang on 2019/6/4.
  */
 public class Client {
     public static void main(String[] args) {
-        ActorBuilder ab = new AngelBuilder();//针对抽象建造者编程
-                //(ActorBuilder) XMLUtil.getBean(); // 反射生成具体建造者对象
-        ActorController ac = new ActorController();
-       // Actor actor = ac.construct(ab); //通过指挥者创建完整的建造者对象
-        Actor actor = ab.construct();  //由建造者直接完成指挥者工作
-        String type = actor.getType();
+        //定义中介者对象
+        ConcreteMediator mediator;
+        mediator = new ConcreteMediator();
 
-        System.out.println(type + "的外观：");
+        //定义同事对象
+        Button addBT = new Button();
+        List list = new List();
+        ComboBox cb = new ComboBox();
+        TextBox userNameTB = new TextBox();
 
-        System.out.println("性别：" + actor.getSex());
+        addBT.setMediator(mediator);
+        list.setMediator(mediator);
+        cb.setMediator(mediator);
+        userNameTB.setMediator(mediator);
 
-        System.out.println("面容：" + actor.getFace());
+        mediator.addButton = addBT;
+        mediator.list = list;
+        mediator.cb = cb;
+        mediator.userNameTextBox = userNameTB;
 
-        System.out.println("服装：" + actor.getCostume());
-
-        System.out.println("发型：" + actor.getHairstyle());
+        addBT.changed();
+        System.out.println("-----------------------------");
+        list.changed();
     }
 }
