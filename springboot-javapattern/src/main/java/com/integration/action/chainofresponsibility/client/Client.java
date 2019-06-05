@@ -1,30 +1,39 @@
 package com.integration.action.chainofresponsibility.client;
 
-import com.integration.create.builder.Actor;
-import com.integration.create.builder.ActorBuilder;
-import com.integration.create.builder.ActorController;
-import com.integration.create.builder.impl.AngelBuilder;
+import com.integration.action.chainofresponsibility.Approver;
+import com.integration.action.chainofresponsibility.PurchaseRequest;
+import com.integration.action.chainofresponsibility.impl.Congress;
+import com.integration.action.chainofresponsibility.impl.Director;
+import com.integration.action.chainofresponsibility.impl.President;
+import com.integration.action.chainofresponsibility.impl.VicePresident;
 
 /**
  * Created by ZhangGang on 2019/6/4.
  */
 public class Client {
     public static void main(String[] args) {
-        ActorBuilder ab = new AngelBuilder();//针对抽象建造者编程
-                //(ActorBuilder) XMLUtil.getBean(); // 反射生成具体建造者对象
-        ActorController ac = new ActorController();
-       // Actor actor = ac.construct(ab); //通过指挥者创建完整的建造者对象
-        Actor actor = ab.construct();  //由建造者直接完成指挥者工作
-        String type = actor.getType();
+        Approver wjzhang, gyang, jguo, meeting;
+        wjzhang = new Director("张无忌");
+        gyang = new VicePresident("杨过");
+        jguo = new President("郭靖");
+        meeting = new Congress("董事会");
 
-        System.out.println(type + "的外观：");
+        //创建职责链
+        wjzhang.setSuccessor(gyang);
+        gyang.setSuccessor(jguo);
+        jguo.setSuccessor(meeting);
 
-        System.out.println("性别：" + actor.getSex());
+        //创建采购单
+        PurchaseRequest pr1 = new PurchaseRequest(45000, 10001, "购买倚天剑");
+        wjzhang.processRequest(pr1);
 
-        System.out.println("面容：" + actor.getFace());
+        PurchaseRequest pr2 = new PurchaseRequest(60000, 10002, "购买《葵花宝典》");
+        wjzhang.processRequest(pr2);
 
-        System.out.println("服装：" + actor.getCostume());
+        PurchaseRequest pr3 = new PurchaseRequest(160000, 10003, "购买《金刚经》");
+        wjzhang.processRequest(pr3);
 
-        System.out.println("发型：" + actor.getHairstyle());
+        PurchaseRequest pr4 = new PurchaseRequest(800000, 10004, "购买桃花岛");
+        wjzhang.processRequest(pr4);
     }
 }
