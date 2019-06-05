@@ -20,17 +20,18 @@ public class ControllerTest {
      * @return strung。
      **/
     @RequestMapping(value = "/service/upload_pic.php",method = RequestMethod.POST)
-    public String helloController(String puid,String chan,
-                                  String zptime,String faceid,
-                                  String acescore,String x,
-                                  String y,String width,
-                                  String height,String age,
-                                  String sex,String glass,
-                                  String end,String stay,
-                                  String picnum,String gpsEW,
-                                  String longitude,String gpsNS,
-                                  String latitude,String remark) throws IOException {
+    public String helloController(String puid, String chan,
+                                  String zptime, String faceid,
+                                  String acescore, String x,
+                                  String y, String width,
+                                  String height, String age,
+                                  String sex, String glass,
+                                  String end, String stay,
+                                  String picnum, String gpsEW,
+                                  String longitude, String gpsNS,
+                                  String latitude, String remark)  {
        /*   级别依次为【从高到低】：FATAL > ERROR > WARN > INFO > DEBUG > TRACE  */
+
         logger.info("error 日志测试！helloController:"+chan);
 
         return "UploadResult: Result=1";
