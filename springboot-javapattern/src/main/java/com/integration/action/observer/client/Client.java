@@ -1,30 +1,36 @@
 package com.integration.action.observer.client;
 
-import com.integration.create.builder.Actor;
-import com.integration.create.builder.ActorBuilder;
-import com.integration.create.builder.ActorController;
-import com.integration.create.builder.impl.AngelBuilder;
+import com.integration.action.observer.AllyControlCenter;
+import com.integration.action.observer.Observer;
+import com.integration.action.observer.impl.ConcreteAllyControlCenter;
+import com.integration.action.observer.impl.Player;
 
 /**
  * Created by ZhangGang on 2019/6/4.
  */
 public class Client {
     public static void main(String[] args) {
-        ActorBuilder ab = new AngelBuilder();//针对抽象建造者编程
-                //(ActorBuilder) XMLUtil.getBean(); // 反射生成具体建造者对象
-        ActorController ac = new ActorController();
-       // Actor actor = ac.construct(ab); //通过指挥者创建完整的建造者对象
-        Actor actor = ab.construct();  //由建造者直接完成指挥者工作
-        String type = actor.getType();
+        //定义观察目标对象
+        AllyControlCenter acc;
+        acc = new ConcreteAllyControlCenter("金庸群侠");
 
-        System.out.println(type + "的外观：");
+        //定义四个观察者对象
+        Observer player1,player2,player3,player4;
 
-        System.out.println("性别：" + actor.getSex());
+        player1 = new Player("杨过");
+        acc.join(player1);
 
-        System.out.println("面容：" + actor.getFace());
+        player2 = new Player("令狐冲");
+        acc.join(player2);
 
-        System.out.println("服装：" + actor.getCostume());
+        player3 = new Player("张无忌");
+        acc.join(player3);
 
-        System.out.println("发型：" + actor.getHairstyle());
+        player4 = new Player("段誉");
+        acc.join(player4);
+
+        //某成员遭受攻击
+        player1.beAttacked(acc);
+
     }
 }
