@@ -2,7 +2,6 @@ package com.integration.mapserver;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.ResourceUtils;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
@@ -11,9 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -54,8 +50,8 @@ public class Map extends HttpServlet {
             String packPath = mapConfig.get(type);
             if (packPath == null) {
                 Properties prop = new Properties();
-                File file3 = ResourceUtils.getFile("classpath:application.properties");
-                InputStream reader = new BufferedInputStream(new FileInputStream(file3));
+               // File file3 = ResourceUtils.getFile("classpath:application.properties");
+                InputStream reader = this.getClass().getResourceAsStream("/application.properties");//new BufferedInputStream(new FileInputStream(file3));
                 prop.load(reader);
                 packPath = prop.getProperty(type);
                 reader.close();
@@ -75,14 +71,14 @@ public class Map extends HttpServlet {
             os.write(buffer, 0, buffer.length);
         } catch (Exception ex) {
             if (nomapImg == null && z <= 14) {
-                File file = ResourceUtils.getFile("classpath:images/nomap.jpg");;
-                nomapImg = ImageIO.read(file);
+              //  File file = ResourceUtils.getFile("classpath:images/nomap.jpg");
+                nomapImg = ImageIO.read(this.getClass().getResourceAsStream("/images/nomap.jpg"));
             }else if( z <= 14){
                 ImageIO.write(nomapImg, "jpeg", os);
             }
             if (nomapTipImg == null && z > 14) {
-                File file = new File(this.getServletContext().getRealPath("/") + "/images/nomaptip.jpg");
-                nomapTipImg = ImageIO.read(file);
+             //   File file = new File(this.getServletContext().getRealPath("/") + "/images/nomaptip.jpg");
+                nomapTipImg = ImageIO.read(this.getClass().getResourceAsStream("/images/nomaptip.jpg"));
             }else if(z > 14){
                 ImageIO.write(nomapTipImg, "jpeg", os);
             }
