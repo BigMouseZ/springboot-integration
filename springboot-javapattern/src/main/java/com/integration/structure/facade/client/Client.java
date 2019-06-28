@@ -12,9 +12,9 @@ public class Client {
         AbstractEncryptFacade ef = new EncryptFacade();
         AbstractEncryptFacade newef = new NewEncryptFacade();
 
-        String fileNameSrc = "D:\\signalway\\test\\src.txt";
-        String fileNameDes = "D:\\signalway\\test\\des.txt";
-        String newfileNameDes = "D:\\signalway\\test\\newdes.txt";
+        String fileNameSrc = "D:\\signalway\\TestEntity\\src.txt";
+        String fileNameDes = "D:\\signalway\\TestEntity\\des.txt";
+        String newfileNameDes = "D:\\signalway\\TestEntity\\newdes.txt";
         ef.FileEncrypt(fileNameSrc, fileNameDes);
         newef.FileEncrypt(fileNameSrc, newfileNameDes);
         System.out.println("执行完毕！");
