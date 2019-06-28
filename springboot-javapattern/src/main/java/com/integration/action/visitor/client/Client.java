@@ -1,30 +1,35 @@
 package com.integration.action.visitor.client;
 
-import com.integration.create.builder.Actor;
-import com.integration.create.builder.ActorBuilder;
-import com.integration.create.builder.ActorController;
-import com.integration.create.builder.impl.AngelBuilder;
+import com.integration.action.visitor.Department;
+import com.integration.action.visitor.Employee;
+import com.integration.action.visitor.EmployeeList;
+import com.integration.action.visitor.impl.FADepartment;
+import com.integration.action.visitor.impl.FulltimeEmployee;
+import com.integration.action.visitor.impl.ParttimeEmployee;
 
 /**
  * Created by ZhangGang on 2019/6/4.
  */
 public class Client {
     public static void main(String[] args) {
-        ActorBuilder ab = new AngelBuilder();//针对抽象建造者编程
-                //(ActorBuilder) XMLUtil.getBean(); // 反射生成具体建造者对象
-        ActorController ac = new ActorController();
-       // Actor actor = ac.construct(ab); //通过指挥者创建完整的建造者对象
-        Actor actor = ab.construct();  //由建造者直接完成指挥者工作
-        String type = actor.getType();
+        EmployeeList list = new EmployeeList();
+        Employee fte1,fte2,fte3,pte1,pte2;
 
-        System.out.println(type + "的外观：");
+        fte1 = new FulltimeEmployee("张无忌",3200.00,45);
+        fte2 = new FulltimeEmployee("杨过",2000.00,40);
+        fte3 = new FulltimeEmployee("段誉",2400.00,38);
+        pte1 = new ParttimeEmployee("洪七公",80.00,20);
+        pte2 = new ParttimeEmployee("郭靖",60.00,18);
 
-        System.out.println("性别：" + actor.getSex());
+        list.addEmployee(fte1);
+        list.addEmployee(fte2);
+        list.addEmployee(fte3);
+        list.addEmployee(pte1);
+        list.addEmployee(pte2);
 
-        System.out.println("面容：" + actor.getFace());
+        Department dep = new FADepartment();
+    //    dep = (Department)XMLUtil.getBean();
+        list.accept(dep);
 
-        System.out.println("服装：" + actor.getCostume());
-
-        System.out.println("发型：" + actor.getHairstyle());
     }
 }
