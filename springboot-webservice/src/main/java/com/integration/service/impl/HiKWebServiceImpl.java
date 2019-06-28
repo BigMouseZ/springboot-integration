@@ -4,10 +4,12 @@ import com.integration.service.HiKWebService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.jws.WebParam;
 import javax.jws.WebService;
 
 
-@WebService(targetNamespace = "http://service.thirdBayonet.webservice.bms.hikvision.com" )
+//@WebService(targetNamespace = "http://service.thirdBayonet.webservice.bms.hikvision.com")
+@WebService
 public class HiKWebServiceImpl implements HiKWebService {
 
     private Logger logger = LoggerFactory.getLogger(HiKWebServiceImpl.class);
@@ -34,5 +36,16 @@ public class HiKWebServiceImpl implements HiKWebService {
                 "<code>1</code>\n" +
                 "\t<message>插入过车信息成功</message>\n" +
                 "</root>\n";
+    }
+
+    @Override
+    public String writeObjectOut(@WebParam(name = "xtlb") String xtlb,
+                                 @WebParam(name = "jkxlh") String jkxlh,
+                                 @WebParam(name = "jkid") String jkid,
+                                 @WebParam(name = "UTF8XmlDoc") String WriteXmlDoc) {
+        logger.info(WriteXmlDoc);
+        String success = "<root><head><code>1</code><message>正确</message><value></value></head></root>";
+        return success;
+
     }
 }

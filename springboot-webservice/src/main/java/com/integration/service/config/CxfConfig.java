@@ -1,6 +1,7 @@
 package com.integration.service.config;
 
 import com.integration.service.HiKWebService;
+import com.integration.service.ServerNameSpaceInterceptor;
 import com.integration.service.impl.HiKWebServiceImpl;
 import org.apache.cxf.Bus;
 import org.apache.cxf.bus.spring.SpringBus;
@@ -34,6 +35,7 @@ public class CxfConfig {
         EndpointImpl endpoint = new EndpointImpl(springBus(), demoService());
        endpoint.publish("/ThirdBayonetService");
         // endpoint.publish("/services/ThirdBayonetService");
+        endpoint.getInInterceptors().add(new ServerNameSpaceInterceptor());
         return endpoint;
     }
 
