@@ -1,12 +1,14 @@
 package com.integration.mapserver;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.imageio.ImageIO;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
@@ -14,28 +16,29 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Properties;
 
 
 /**
  * Created by LiYu on 2017/3/15.
+ *
+ * public class Map extends HttpServlet {
  */
-//@CrossOrigin
-@WebServlet("/map.ashx")
-public class Map extends HttpServlet {
+
+@Slf4j
+@RestController
+public class Map {
+
     public static HashMap<String, HashMap<String, MapTile>> mapIdx = new HashMap<String, HashMap<String, MapTile>>();
     public static HashMap<String, String> mapConfig = new HashMap<String, String>();
     public static BufferedImage nomapImg = null;
     public static BufferedImage nomapTipImg = null;
     private static final Logger logger = LoggerFactory.getLogger(Map.class);
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    @CrossOrigin
+    @RequestMapping(value = "/map.ashx", method = RequestMethod.GET)
+    public void helloController(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("image/png");
         OutputStream os = resp.getOutputStream();
         String type = req.getParameter("t");
@@ -43,14 +46,13 @@ public class Map extends HttpServlet {
         int y = Integer.parseInt(req.getParameter("y"));
         int z = Integer.parseInt(req.getParameter("z"));
         try {
-
             if (type == null || ("").equals(type)) {
                 type = "pack_path";
             }
             String packPath = mapConfig.get(type);
             if (packPath == null) {
                 Properties prop = new Properties();
-               // File file3 = ResourceUtils.getFile("classpath:application.properties");
+                // File file3 = ResourceUtils.getFile("classpath:application.properties");
                 InputStream reader = this.getClass().getResourceAsStream("/application.properties");//new BufferedInputStream(new FileInputStream(file3));
                 prop.load(reader);
                 packPath = prop.getProperty(type);
@@ -71,15 +73,15 @@ public class Map extends HttpServlet {
             os.write(buffer, 0, buffer.length);
         } catch (Exception ex) {
             if (nomapImg == null && z <= 14) {
-              //  File file = ResourceUtils.getFile("classpath:images/nomap.jpg");
+                //  File file = ResourceUtils.getFile("classpath:images/nomap.jpg");
                 nomapImg = ImageIO.read(this.getClass().getResourceAsStream("/images/nomap.jpg"));
-            }else if( z <= 14){
+            } else if (z <= 14) {
                 ImageIO.write(nomapImg, "jpeg", os);
             }
             if (nomapTipImg == null && z > 14) {
-             //   File file = new File(this.getServletContext().getRealPath("/") + "/images/nomaptip.jpg");
+                //   File file = new File(this.getServletContext().getRealPath("/") + "/images/nomaptip.jpg");
                 nomapTipImg = ImageIO.read(this.getClass().getResourceAsStream("/images/nomaptip.jpg"));
-            }else if(z > 14){
+            } else if (z > 14) {
                 ImageIO.write(nomapTipImg, "jpeg", os);
             }
             logger.error(ex.getMessage());
@@ -118,29 +120,5 @@ public class Map extends HttpServlet {
             return buffer;
         }
     }
-
-    private byte[] _writeMySqlMap(String type, int x, int y, int z, String packPath) throws Exception {
-        byte[] buffer = null;
-
-        Class.forName("com.mysql.jdbc.Driver");
-        Connection conn = DriverManager.getConnection(packPath);
-
-        String sql = "select Tile from gmapnetcache where x=? and y=? and zoom=?";
-        PreparedStatement ptmt = conn.prepareStatement(sql);
-        ptmt.setString(1, x + "");
-        ptmt.setString(2, y + "");
-        ptmt.setString(3, z + "");
-
-        ResultSet rs = ptmt.executeQuery();
-
-        while (rs.next()) {
-            buffer = rs.getBytes("Tile");
-        }
-        rs.close();
-        ptmt.close();
-        conn.close();
-
-        return buffer;
-    }
-
 }
+
