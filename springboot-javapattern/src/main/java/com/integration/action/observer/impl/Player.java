@@ -2,17 +2,15 @@ package com.integration.action.observer.impl;
 
 import com.integration.action.observer.AllyControlCenter;
 import com.integration.action.observer.Observer;
+import lombok.AllArgsConstructor;
 
 /**
  * Created by Administrator on 2019/6/8 0008.
  */
  //战队成员类：具体观察者类
+@AllArgsConstructor
 public class Player implements Observer {
     private String name;
-
-    public Player(String name) {
-        this.name = name;
-    }
 
     public void setName(String name) {
         this.name = name;
