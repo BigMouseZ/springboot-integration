@@ -21,6 +21,7 @@
         <module>springboot-lambda</module>
         <module>springboot-webservice</module>
         <module>springboot-javapattern</module>
+        <module>springboot-entity</module>
     </modules>
 
 
