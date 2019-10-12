@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.integreation.cms.cmsdao.UserRoleMapper">
+    <resultMap id="BaseResultMap" type="com.integreation.cms.entity.cms.cmsentity.UserRoleEntity">
+        <result column="guid" property="guid" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="VARCHAR"/>
+        <result column="role_id" property="roleId" jdbcType="VARCHAR"/>
+        <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP"/>
+        <result column="add_time" property="addTime" jdbcType="TIMESTAMP"/>
+        <result column="role_name" property="roleName" jdbcType="VARCHAR"/>
+        <result column="role_state" property="roleState" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+     guid,user_id,role_id,modify_time,add_time
+  </sql>
+
+    <!-- 公用查询条件语句块 -->
+    <sql id="selectSql">
+        <if test="guid != null and guid != ''">
+            <![CDATA[and  guid = #{guid,jdbcType=VARCHAR}]]>
+        </if>
+        <if test="roleId != null and roleId != ''">
+            <![CDATA[and  role_id = #{roleId,jdbcType=VARCHAR}]]>
+        </if>
+        <if test="userId != null and userId != ''">
+            <![CDATA[and  user_id = #{userId,jdbcType=VARCHAR}]]>
+        </if>
+    </sql>
+
+    <insert id="insertSelective" parameterType="com.integreation.cms.entity.cms.cmsentity.UserRoleEntity">
+        insert into sys_users_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="guid != null">
+                guid,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="roleId != null">
+                role_id,
+            </if>
+                add_time,
+                modify_time,
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="guid != null">
+                #{guid,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="roleId != null">
+                #{roleId,jdbcType=VARCHAR},
+            </if>
+                now(),
+                now(),
+        </trim>
+    </insert>
+
+    <delete id="deleteById" parameterType="com.integreation.cms.entity.cms.cmsentity.UserRoleEntity">
+        DELETE FROM sys_users_role
+        <where>
+            <include refid="selectSql"></include>
+        </where>
+    </delete>
+
+    <select id="getForList" parameterType="com.integreation.cms.entity.cms.cmsentity.UserRoleEntity" resultMap="BaseResultMap">
+        select
+        sys_role.guid as role_id,
+        sys_role.role_name,
+        tba.role_id as role_state ,
+        tba.user_id
+        from sys_role LEFT JOIN (
+        select role_id,user_id from sys_users_role where user_id = '${userId}'
+        ) tba on tba.role_id = sys_role.guid
+        <where>
+            <if test="roleState != null and roleState != ''">
+                <![CDATA[ and  tba.role_id is not null ]]>
+            </if>
+        </where>
+    </select>
+
+</mapper>

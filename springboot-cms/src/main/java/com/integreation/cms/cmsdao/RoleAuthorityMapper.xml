@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.integreation.cms.cmsdao.RoleAuthorityMapper">
+    <resultMap id="BaseResultMap" type="com.integreation.cms.entity.cms.cmsentity.RoleAuthorityEntity">
+        <result column="guid" jdbcType="VARCHAR" property="guid"/>
+        <result column="role_id" jdbcType="VARCHAR" property="roleId"/>
+        <result column="authority_id" jdbcType="VARCHAR" property="authorityId"/>
+        <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
+        <result column="add_time" jdbcType="TIMESTAMP" property="addTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    guid, role_id, authority_id, modify_time, add_time
+  </sql>
+    <!-- 公用查询条件语句块 -->
+    <sql id="selectSql">
+        <if test="guid != null and guid != ''">
+            <![CDATA[and  guid = #{guid,jdbcType=VARCHAR}]]>
+        </if>
+        <if test="roleId != null and roleId != ''">
+            <![CDATA[and  role_id = #{roleId,jdbcType=VARCHAR}]]>
+        </if>
+        <if test="authorityId != null and authorityId != ''">
+            <![CDATA[and  authority_id = #{authorityId,jdbcType=VARCHAR}]]>
+        </if>
+    </sql>
+
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from DT_ROLE_AUTHORITY
+        where ROLE_AUTHORITY_NO = #{roleAuthorityNo,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from DT_ROLE_AUTHORITY
+    where ROLE_AUTHORITY_NO = #{roleAuthorityNo,jdbcType=VARCHAR}
+  </delete>
+
+    <delete id="deleteById" parameterType="java.lang.String">
+        delete from sys_role_authority
+        <where>
+            <include refid="selectSql"></include>
+        </where>
+    </delete>
+
+    <insert id="insertList" parameterType="java.util.ArrayList">
+        insert into sys_role_authority (guid, role_id, authority_id, modify_time, add_time)
+        values
+        <foreach collection="list" item="item" separator=",">
+          (  #{item.guid,jdbcType=VARCHAR},#{item.roleId,jdbcType=VARCHAR},#{item.authorityId,jdbcType=VARCHAR},now(),now())
+        </foreach>
+
+    </insert>
+    <insert id="insertSelective" parameterType="com.integreation.cms.entity.cms.cmsentity.RoleAuthorityEntity">
+        insert into DT_ROLE_AUTHORITY
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="roleAuthorityNo != null">
+                ROLE_AUTHORITY_NO,
+            </if>
+            <if test="roleNo != null">
+                ROLE_NO,
+            </if>
+            <if test="authorityNo != null">
+                AUTHORITY_NO,
+            </if>
+            <if test="authorityTime != null">
+                AUTHORITY_TIME,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="roleAuthorityNo != null">
+                #{roleAuthorityNo,jdbcType=VARCHAR},
+            </if>
+            <if test="roleNo != null">
+                #{roleNo,jdbcType=VARCHAR},
+            </if>
+            <if test="authorityNo != null">
+                #{authorityNo,jdbcType=VARCHAR},
+            </if>
+            <if test="authorityTime != null">
+                now(),
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.integreation.cms.entity.cms.cmsentity.RoleAuthorityEntity">
+        update DT_ROLE_AUTHORITY
+        <set>
+            <if test="roleNo != null">
+                ROLE_NO = #{roleNo,jdbcType=VARCHAR},
+            </if>
+            <if test="authorityNo != null">
+                AUTHORITY_NO = #{authorityNo,jdbcType=VARCHAR},
+            </if>
+            <if test="authorityTime != null">
+                AUTHORITY_TIME = #{authorityTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where ROLE_AUTHORITY_NO = #{roleAuthorityNo,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.integreation.cms.entity.cms.cmsentity.RoleAuthorityEntity">
+    update DT_ROLE_AUTHORITY
+    set ROLE_NO = #{roleNo,jdbcType=VARCHAR},
+      AUTHORITY_NO = #{authorityNo,jdbcType=VARCHAR},
+      AUTHORITY_TIME = #{authorityTime,jdbcType=TIMESTAMP}
+    where ROLE_AUTHORITY_NO = #{roleAuthorityNo,jdbcType=VARCHAR}
+  </update>
+
+    <update id="updateByRoleNoAndAuthorityNo" parameterType="com.integreation.cms.entity.cms.cmsentity.RoleAuthorityEntity">
+        update DT_ROLE_AUTHORITY
+        <set>
+            <if test="roleNo != null">
+                ROLE_NO = #{roleNo,jdbcType=VARCHAR},
+            </if>
+            <if test="authorityNo != null">
+                AUTHORITY_NO = #{authorityNo,jdbcType=VARCHAR},
+            </if>
+            <if test="authorityTime != null">
+                AUTHORITY_TIME = #{authorityTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where ROLE_NO = #{ROLE_NO,jdbcType=VARCHAR}
+        AND AUTHORITY_NO = #{AUTHORITY_NO,jdbcType=VARCHAR}
+    </update>
+
+    <delete id="delRecord" parameterType="com.integreation.cms.entity.cms.cmsentity.RoleAuthorityEntity">
+    delete from DT_ROLE_AUTHORITY
+    where AUTHORITY_NO = #{authorityNo,jdbcType=VARCHAR}
+      and ROLE_NO = #{roleNo,jdbcType=VARCHAR}
+  </delete>
+    <select id="getForList" resultMap="BaseResultMap" parameterType="com.integreation.cms.entity.cms.cmsentity.RoleAuthorityEntity">
+        select tbc.* from
+        (
+        SELECT
+        tba.guid as authority_id
+        from sys_authority tba LEFT JOIN sys_authority tbb on tba.parent_id = tbb.guid
+        ) tbc LEFT JOIN (select authority_id,role_id from sys_role_authority where role_id = '${roleId}'
+        ) tbd on tbd.authority_id = tbc.authority_id
+        <where>
+            <if test="authorityState != null and authorityState != ''">
+                <![CDATA[and  tbd.authority_id  is not null ]]>
+            </if>
+        </where>
+        ORDER BY tbd.authority_id ASC
+    </select>
+
+</mapper>

@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.integreation.cms.cmsdao.SysDictionariesMapper">
+    <resultMap id="BaseResultMap" type="com.integreation.cms.entity.cms.cmsentity.DictionariesEntity">
+        <result column="guid" jdbcType="VARCHAR" property="guid"/>
+        <result column="dictionaries_type" jdbcType="VARCHAR" property="dictionariesType"/>
+        <result column="parent_code" jdbcType="VARCHAR" property="parentCode"/>
+        <result column="dictionaries_code" jdbcType="VARCHAR" property="dictionariesCode"/>
+        <result column="dictionaries_name" jdbcType="VARCHAR" property="dictionariesName"/>
+        <result column="dictionaries_value" jdbcType="VARCHAR" property="dictionariesValue"/>
+        <result column="sort" jdbcType="INTEGER" property="sort"/>
+        <result column="state" jdbcType="BIT" property="state"/>
+        <result column="edit" jdbcType="BIT" property="edit"/>
+        <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
+        <result column="add_time" jdbcType="TIMESTAMP" property="addTime"/>
+        <result column="additional" jdbcType="VARCHAR" property="additional"/>
+        <result column="dictionaries_describe" jdbcType="VARCHAR" property="dictionariesDescribe"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    guid, dictionaries_type, parent_code, dictionaries_code, dictionaries_name, dictionaries_value, 
+    sort, state, edit, modify_time, add_time, additional, dictionaries_describe
+  </sql>
+    <select id="selectById" parameterType="com.integreation.cms.entity.cms.cmsentity.DictionariesEntity" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_dictionaries
+        where guid = #{guid,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectByDictionariesCode" parameterType="com.integreation.cms.entity.cms.cmsentity.DictionariesEntity"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_dictionaries
+        where dictionaries_code = #{dictionariesCode,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteBySelective" parameterType="com.integreation.cms.entity.cms.cmsentity.DictionariesEntity">
+    delete from sys_dictionaries
+    <where>
+        <if test="guid!=null and guid!=''">
+           and guid = #{guid,jdbcType=VARCHAR}
+        </if>
+        <if test="parentCode!=null and parentCode!=''">
+          and  parent_code = #{parentCode,jdbcType=VARCHAR}
+        </if>
+    </where>
+
+  </delete>
+    <insert id="insertSelective" parameterType="com.integreation.cms.entity.cms.cmsentity.DictionariesEntity">
+        insert into sys_dictionaries
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="guid != null">
+                guid,
+            </if>
+            <if test="dictionariesType != null">
+                dictionaries_type,
+            </if>
+            <if test="parentCode != null">
+                parent_code,
+            </if>
+            <if test="dictionariesCode != null">
+                dictionaries_code,
+            </if>
+            <if test="dictionariesName != null">
+                dictionaries_name,
+            </if>
+            <if test="dictionariesValue != null">
+                dictionaries_value,
+            </if>
+            <if test="sort != null">
+                sort,
+            </if>
+            <if test="state != null">
+                state,
+            </if>
+            <if test="edit != null">
+                edit,
+            </if>
+                modify_time,
+                add_time,
+            <if test="additional != null">
+                additional,
+            </if>
+            <if test="dictionariesDescribe != null">
+                dictionaries_describe,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="guid != null">
+                #{guid,jdbcType=VARCHAR},
+            </if>
+            <if test="dictionariesType != null">
+                #{dictionariesType,jdbcType=VARCHAR},
+            </if>
+            <if test="parentCode != null">
+                #{parentCode,jdbcType=VARCHAR},
+            </if>
+            <if test="dictionariesCode != null">
+                #{dictionariesCode,jdbcType=VARCHAR},
+            </if>
+            <if test="dictionariesName != null">
+                #{dictionariesName,jdbcType=VARCHAR},
+            </if>
+            <if test="dictionariesValue != null">
+                #{dictionariesValue,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="state != null">
+                #{state,jdbcType=BIT},
+            </if>
+            <if test="edit != null">
+                #{edit,jdbcType=BIT},
+            </if>
+            now(),
+            now(),
+            <if test="additional != null">
+                #{additional,jdbcType=VARCHAR},
+            </if>
+            <if test="dictionariesDescribe != null">
+                #{dictionariesDescribe,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.integreation.cms.entity.cms.cmsentity.DictionariesEntity">
+        update sys_dictionaries
+        <set>
+            <if test="dictionariesType != null">
+                dictionaries_type = #{dictionariesType,jdbcType=VARCHAR},
+            </if>
+            <if test="parentCode != null">
+                parent_code = #{parentCode,jdbcType=VARCHAR},
+            </if>
+            <if test="dictionariesCode != null">
+                dictionaries_code = #{dictionariesCode,jdbcType=VARCHAR},
+            </if>
+            <if test="dictionariesName != null">
+                dictionaries_name = #{dictionariesName,jdbcType=VARCHAR},
+            </if>
+            <if test="dictionariesValue != null">
+                dictionaries_value = #{dictionariesValue,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null">
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="state != null">
+                state = #{state,jdbcType=BIT},
+            </if>
+            <if test="edit != null">
+                edit = #{edit,jdbcType=BIT},
+            </if>
+                modify_time = now(),
+            <if test="addTime != null">
+                add_time = #{addTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="additional != null">
+                additional = #{additional,jdbcType=VARCHAR},
+            </if>
+            <if test="dictionariesDescribe != null">
+                dictionaries_describe = #{dictionariesDescribe,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where guid = #{guid,jdbcType=VARCHAR}
+    </update>
+
+    <select id="listAllByCondition" parameterType="com.integreation.cms.entity.cms.cmsentity.DictionariesEntity" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_dictionaries
+        <where>
+            <if test="parentCode == 'group'">
+                and parent_code = '' or parent_code is null
+            </if>
+            <if test="parentCode != null and parentCode != 'group'">
+                and parent_code = #{parentCode,jdbcType=VARCHAR}
+            </if>
+        </where>
+        order by sort
+    </select>
+</mapper>
