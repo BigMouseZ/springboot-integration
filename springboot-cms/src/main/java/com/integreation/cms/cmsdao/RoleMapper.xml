@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.integreation.cms.cmsdao.RoleMapper" >
+  <resultMap id="BaseResultMap" type="com.integreation.cms.entity.cms.cmsentity.RoleEntity" >
+    <id column="guid" jdbcType="VARCHAR" property="guid" />
+    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+    <result column="role_describe" jdbcType="VARCHAR" property="roleDescribe" />
+    <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+    <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+    <result column="start_page" jdbcType="VARCHAR" property="startPage" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    guid, role_name, role_describe, modify_time, add_time, start_page
+  </sql>
+
+  <select id="selectByRoleName" parameterType="com.integreation.cms.entity.cms.cmsentity.RoleEntity" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM sys_role
+    <where>
+      <if test="notself != null and notself != ''">
+        <![CDATA[and  guid != #{guid,jdbcType=VARCHAR}]]>
+      </if>
+      <if test="roleName != null and roleName != ''">
+        <![CDATA[and  role_name = #{roleName,jdbcType=VARCHAR}]]>
+      </if>
+    </where>
+    limit 1
+  </select>
+
+  <select id="countByRoleName" parameterType="com.integreation.cms.entity.cms.cmsentity.RoleEntity" resultType="int">
+    SELECT count(1) FROM DT_ROLE WHERE ROLE_NAME = #{roleName}
+  </select>
+
+  <select id="selectAll" parameterType="com.integreation.cms.entity.cms.cmsentity.RoleEntity" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from sys_role
+   <where>
+     <if test="uiview != null and uiview != ''">
+       <![CDATA[and  guid != #{uiview,jdbcType=VARCHAR}]]>
+     </if>
+   </where>
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from sys_role
+    where guid = #{roleId,jdbcType=VARCHAR}
+  </select>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.integreation.cms.entity.cms.cmsentity.RoleEntity">
+    update sys_role
+    <set>
+      <if test="roleName != null">
+        role_name = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleDescribe != null">
+        role_describe = #{roleDescribe,jdbcType=VARCHAR},
+      </if>
+        modify_time = now(),
+      <if test="addTime != null">
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="startPage != null">
+        start_page = #{startPage,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where guid = #{guid,jdbcType=VARCHAR}
+  </update>
+
+  <insert id="insertSelective" parameterType="com.integreation.cms.entity.cms.cmsentity.RoleEntity">
+    insert into sys_role
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="guid != null">
+        guid,
+      </if>
+      <if test="roleName != null">
+        role_name,
+      </if>
+      <if test="roleDescribe != null">
+        role_describe,
+      </if>
+        modify_time,
+        add_time,
+      <if test="startPage != null">
+        start_page,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="guid != null">
+        #{guid,jdbcType=VARCHAR},
+      </if>
+      <if test="roleName != null">
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="roleDescribe != null">
+        #{roleDescribe,jdbcType=VARCHAR},
+      </if>
+      now(),
+      now(),
+      <if test="startPage != null">
+        #{startPage,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <insert id="saveByExample" parameterType="com.integreation.cms.entity.cms.cmsentity.RoleEntity" >
+    insert into DT_ROLE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="roleId != null" >
+        ROLE_ID,
+      </if>
+      <if test="roleNo != null" >
+        ROLE_NO,
+      </if>
+      <if test="roleName != null" >
+        ROLE_NAME,
+      </if>
+      <if test="addTime != null" >
+        ADD_TIME,
+      </if>
+      <if test="updateTime != null" >
+        UPDATE_TIME,
+      </if>
+      <if test="roleDescribe != null" >
+        ROLE_DESCRIBE,
+      </if>
+      <if test="createUser != null" >
+        CREATE_USER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="roleId != null" >
+        #{roleId,jdbcType=DECIMAL},
+      </if>
+      <if test="roleNo != null" >
+        #{roleNo,jdbcType=VARCHAR},
+      </if>
+      <if test="roleName != null" >
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null" >
+        now(),
+      </if>
+      <if test="updateTime != null" >
+        now(),
+      </if>
+      <if test="roleDescribe != null" >
+        #{roleDescribe,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sys_role
+    where guid = #{guid,jdbcType=VARCHAR}
+  </delete>
+</mapper>

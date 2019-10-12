@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.integreation.cms.cmsdao.AuthorityMapper">
+    <resultMap id="BaseResultMap" type="com.integreation.cms.entity.cms.cmsentity.AuthorityEntity">
+        <id column="guid" property="guid" jdbcType="VARCHAR" />
+        <result column="authority_name" property="authorityName" jdbcType="VARCHAR" />
+        <result column="authority_type" property="authorityType" jdbcType="VARCHAR" />
+        <result column="start_path" property="startPath" jdbcType="VARCHAR" />
+        <result column="display_name" property="displayName" jdbcType="VARCHAR" />
+        <result column="sort" property="sort" jdbcType="INTEGER" />
+        <result column="icon" property="icon" jdbcType="VARCHAR" />
+        <result column="command" property="command" jdbcType="VARCHAR" />
+        <result column="parent_id" property="parentId" jdbcType="VARCHAR" />
+        <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+        <result column="add_time" property="addTime" jdbcType="TIMESTAMP" />
+        <result column="parent_name" property="parentName" jdbcType="VARCHAR" />
+        <result column="authority_state" property="authorityState" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+     guid,authority_name,authority_type,start_path,display_name,sort,icon,command,parent_id,modify_time,add_time
+  </sql>
+    <!-- 公用查询条件语句块 -->
+    <sql id="select_where_Sql">
+        <if test="authorityName != null and authorityName != ''">
+            and authority_name = #{authorityName,jdbcType=VARCHAR}
+        </if>
+    </sql>
+    <insert id="insertSelective" parameterType="com.integreation.cms.entity.cms.cmsentity.AuthorityEntity">
+        insert into sys_authority
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="guid != null">
+                guid,
+            </if>
+            <if test="authorityName != null">
+                authority_name,
+            </if>
+            <if test="authorityType != null">
+                authority_type,
+            </if>
+            <if test="startPath != null">
+                start_path,
+            </if>
+            <if test="displayName != null">
+                display_name,
+            </if>
+            <if test="sort != null">
+                sort,
+            </if>
+            <if test="icon != null">
+                icon,
+            </if>
+            <if test="command != null">
+                command,
+            </if>
+            <if test="parentId != null">
+                parent_id,
+            </if>
+                modify_time,
+                add_time,
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="guid != null">
+                #{guid,jdbcType=VARCHAR},
+            </if>
+            <if test="authorityName != null">
+                #{authorityName,jdbcType=VARCHAR},
+            </if>
+            <if test="authorityType != null">
+                #{authorityType,jdbcType=VARCHAR},
+            </if>
+            <if test="startPath != null">
+                #{startPath,jdbcType=VARCHAR},
+            </if>
+            <if test="displayName != null">
+                #{displayName,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="icon != null">
+                #{icon,jdbcType=VARCHAR},
+            </if>
+            <if test="command != null">
+                #{command,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null">
+                #{parentId,jdbcType=VARCHAR},
+            </if>
+            now(),
+            now(),
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.integreation.cms.entity.cms.cmsentity.AuthorityEntity">
+        update sys_authority
+        <set>
+            <if test="guid != null">
+                guid = #{guid,jdbcType=VARCHAR},
+            </if>
+            <if test="authorityName != null">
+                authority_name = #{authorityName,jdbcType=VARCHAR},
+            </if>
+            <if test="authorityType != null">
+                authority_type = #{authorityType,jdbcType=VARCHAR},
+            </if>
+            <if test="startPath != null">
+                start_path = #{startPath,jdbcType=VARCHAR},
+            </if>
+            <if test="displayName != null">
+                display_name = #{displayName,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null">
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="icon != null">
+                icon = #{icon,jdbcType=VARCHAR},
+            </if>
+            <if test="command != null">
+                command = #{command,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null">
+                parent_id = #{parentId,jdbcType=VARCHAR},
+            </if>
+            <if test="modifyTime != null">
+                modify_time = now(),
+            </if>
+            <if test="addTime != null">
+                add_time = #{addTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where guid = #{guid,jdbcType=VARCHAR}
+    </update>
+    <select id="selectByAuthorityName" parameterType="com.integreation.cms.entity.cms.cmsentity.AuthorityEntity" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_authority
+        <where>
+            <include refid="select_where_Sql"></include>
+        </where>
+        limit 1
+    </select>
+
+    <delete id="deleteById" parameterType="com.integreation.cms.entity.cms.cmsentity.AuthorityEntity">
+        delete from sys_authority
+        where guid = #{guid,jdbcType=VARCHAR}
+    </delete>
+    <!-- getForList查询多条记录 -->
+    <select id="getForList" parameterType="com.integreation.cms.entity.cms.cmsentity.AuthorityEntity" resultMap="BaseResultMap">
+     	select
+		tba.guid ,
+		tba.authority_name,
+		tba.authority_type,
+		tba.start_path,
+		tba.display_name,
+		tba.icon,
+		tba.command,
+		tbb.authority_id as authority_state,
+		'${userId}' as user_id,
+		tba.parent_id,
+		tba.sort
+		from sys_authority tba LEFT JOIN
+		(select distinct authority_id from sys_role_authority
+		where role_id in(
+		select role_id from sys_users_role where user_id ='${userId}'
+		)) tbb on tba.guid = tbb.authority_id
+        <where>
+            <include refid="selectSql"></include>
+        </where>
+        <![CDATA[ order by tbb.authority_id asc ]]>
+    </select>
+
+    <!-- 公用查询条件语句块 -->
+    <sql id="selectSql">
+        <if test="guid != null and guid != ''">
+            <![CDATA[and  tba.guid  = #{guid,jdbcType=VARCHAR}]]>
+        </if>
+        <if test="authorityName != null and authorityName != ''">
+            <![CDATA[and  tba.authority_name = '%${authorityName}%']]>
+        </if>
+        <if test="authorityType != null and authorityType != ''">
+            <![CDATA[ and  tba.authority_type =  #{authorityType,jdbcType=VARCHAR} ]]>
+        </if>
+        <if test="authorityState != null and authorityState != ''">
+            <![CDATA[ and tbb.authority_id is not null ]]>
+        </if>
+        <choose>
+            <when test="parentId != null and parentId == 'top'">
+                and tba.parent_id is null
+            </when>
+            <when test="parentId != null and parentId != ''">
+                and tba.parent_id = #{parentId,jdbcType=VARCHAR}
+            </when>
+            <otherwise>
+                and 1=1
+            </otherwise>
+        </choose>
+    </sql>
+
+    <!-- getPageList获取分页数据 -->
+    <select id="listAllByCondition" parameterType="com.integreation.cms.entity.cms.cmsentity.AuthorityEntity" resultMap="BaseResultMap">
+         select  tbc.* from
+         (select tba.*,tbb.authority_name as parent_name from sys_authority tba LEFT JOIN sys_authority tbb on tba.parent_id = tbb.guid) tbc
+        <where>
+            <include refid="selectPageSql"></include>
+        </where>
+        order by sort
+    </select>
+
+    <sql id="selectPageSql">
+        <if test="guid != null and guid != ''" >
+            <![CDATA[and  guid = #{guid,jdbcType=VARCHAR}]]>
+        </if>
+        <if test="authorityName != null and authorityName != ''" >
+            <![CDATA[and  authority_name like '%${authorityName}%']]>
+        </if>
+        <if test="authorityType != null and authorityType != ''" >
+            <![CDATA[ and  authority_type = #{authorityType,jdbcType=VARCHAR}]]>
+        </if>
+        <if test="parentId != null and parentId != ''" >
+            <![CDATA[ and  parent_id = #{parentId,jdbcType=VARCHAR}]]>
+        </if>
+        <if test="displayName != null and displayName != ''" >
+            <![CDATA[and  display_name like '%${displayName}%']]>
+        </if>
+        <if test="onlyUserAuto != null and onlyUserAuto != ''">
+            <![CDATA[ and  tbc.guid in(
+			select distinct authority_id from sys_role_authority where role_id in(
+			select role_id from sys_users_role where user_id = '${onlyUserAuto}')
+			)
+		]]>
+        </if>
+    </sql>
+
+</mapper>

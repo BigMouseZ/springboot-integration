@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.integreation.cms.cmsdao.SysParameterConfigMapper">
+    <resultMap id="BaseResultMap" type="com.integreation.cms.entity.cms.cmsentity.SysParameterConfigEntity">
+        <id column="guid" jdbcType="VARCHAR" property="guid"/>
+        <result column="parameter_type" jdbcType="VARCHAR" property="parameterType"/>
+        <result column="parent_key" jdbcType="VARCHAR" property="parentKey"/>
+        <result column="parameter_key" jdbcType="VARCHAR" property="parameterKey"/>
+        <result column="parameter_name" jdbcType="VARCHAR" property="parameterName"/>
+        <result column="parameter_value" jdbcType="VARCHAR" property="parameterValue"/>
+        <result column="sort" jdbcType="INTEGER" property="sort"/>
+        <result column="edit" jdbcType="BIT" property="edit"/>
+        <result column="parameter_describe" jdbcType="VARCHAR" property="parameterDescribe"/>
+        <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime"/>
+        <result column="add_time" jdbcType="TIMESTAMP" property="addTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    guid, parameter_type, parent_key, parameter_key, parameter_name, parameter_value, 
+    sort, edit, parameter_describe, modify_time, add_time
+  </sql>
+    <select id="listAllByCondition" parameterType="com.integreation.cms.entity.cms.cmsentity.SysParameterConfigEntity" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from sys_parameter_config
+        <where>
+            <if test="parentKey == 'group'">
+                and parent_key = '' or parent_key is null
+            </if>
+            <if test="parentKey != null and parentKey != 'group'">
+                and parent_key = #{parentKey,jdbcType=VARCHAR}
+            </if>
+        </where>
+        order by guid asc
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_parameter_config
+        where guid = #{guid,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sys_parameter_config
+    where guid = #{guid,jdbcType=VARCHAR}
+  </delete>
+
+
+    <insert id="insertSelective" parameterType="com.integreation.cms.entity.cms.cmsentity.SysParameterConfigEntity">
+        insert into sys_parameter_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="guid != null">
+                guid,
+            </if>
+            <if test="parameterType != null">
+                parameter_type,
+            </if>
+            <if test="parentKey != null">
+                parent_key,
+            </if>
+            <if test="parameterKey != null">
+                parameter_key,
+            </if>
+            <if test="parameterName != null">
+                parameter_name,
+            </if>
+            <if test="parameterValue != null">
+                parameter_value,
+            </if>
+            <if test="sort != null">
+                sort,
+            </if>
+            <if test="edit != null">
+                edit,
+            </if>
+            <if test="parameterDescribe != null">
+                parameter_describe,
+            </if>
+            modify_time,
+            add_time,
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="guid != null">
+                #{guid,jdbcType=VARCHAR},
+            </if>
+            <if test="parameterType != null">
+                #{parameterType,jdbcType=VARCHAR},
+            </if>
+            <if test="parentKey != null">
+                #{parentKey,jdbcType=VARCHAR},
+            </if>
+            <if test="parameterKey != null">
+                #{parameterKey,jdbcType=VARCHAR},
+            </if>
+            <if test="parameterName != null">
+                #{parameterName,jdbcType=VARCHAR},
+            </if>
+            <if test="parameterValue != null">
+                #{parameterValue,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="edit != null">
+                #{edit,jdbcType=BIT},
+            </if>
+            <if test="parameterDescribe != null">
+                #{parameterDescribe,jdbcType=VARCHAR},
+            </if>
+            now(),
+            now(),
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.integreation.cms.entity.cms.cmsentity.SysParameterConfigEntity">
+        update sys_parameter_config
+        <set>
+            <if test="parameterType != null">
+                parameter_type = #{parameterType,jdbcType=VARCHAR},
+            </if>
+            <if test="parentKey != null">
+                parent_key = #{parentKey,jdbcType=VARCHAR},
+            </if>
+            <if test="parameterKey != null">
+                parameter_key = #{parameterKey,jdbcType=VARCHAR},
+            </if>
+            <if test="parameterName != null">
+                parameter_name = #{parameterName,jdbcType=VARCHAR},
+            </if>
+            <if test="parameterValue != null">
+                parameter_value = #{parameterValue,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null">
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="edit != null">
+                edit = #{edit,jdbcType=BIT},
+            </if>
+            <if test="parameterDescribe != null">
+                parameter_describe = #{parameterDescribe,jdbcType=VARCHAR},
+            </if>
+            modify_time = now(),
+            <if test="addTime != null">
+                add_time = #{addTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where guid = #{guid,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.integreation.cms.entity.cms.cmsentity.SysParameterConfigEntity">
+    update sys_parameter_config
+    set parameter_type = #{parameterType,jdbcType=VARCHAR},
+      parent_key = #{parentKey,jdbcType=VARCHAR},
+      parameter_key = #{parameterKey,jdbcType=VARCHAR},
+      parameter_name = #{parameterName,jdbcType=VARCHAR},
+      parameter_value = #{parameterValue,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      edit = #{edit,jdbcType=BIT},
+      parameter_describe = #{parameterDescribe,jdbcType=VARCHAR},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      add_time = #{addTime,jdbcType=TIMESTAMP}
+    where guid = #{guid,jdbcType=VARCHAR}
+  </update>
+</mapper>
