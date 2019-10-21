@@ -22,6 +22,7 @@
         <module>springboot-webservice</module>
         <module>springboot-javapattern</module>
         <module>springboot-cms</module>
+        <module>springboot-jpa</module>
     </modules>
 
 
