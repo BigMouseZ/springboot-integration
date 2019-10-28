@@ -1,9 +1,10 @@
 package com.integration.springbootjpa;
 
+import com.integration.springbootjpa.entity.SysAuthority;
 import com.integration.springbootjpa.entity.SysUsers;
 import com.integration.springbootjpa.entity.SysUsersRole;
 import com.integration.springbootjpa.entity.UserDTO;
-import com.integration.springbootjpa.repository.SysUsersRepository;
+import com.integration.springbootjpa.repository.SysAuthorityRepository;
 import com.integration.springbootjpa.repository.SysUsersRepositoryDsl;
 import com.integration.springbootjpa.repository.service.SysUsersRepositoryService;
 import org.junit.Test;
@@ -24,7 +25,7 @@ import java.util.List;
 public class SpringbootJpaDSLTests {
 
     @Resource
-    private SysUsersRepository sysUsersRepository;
+    private SysAuthorityRepository sysAuthorityRepository;
     @Resource
     private SysUsersRepositoryDsl sysUsersRepositoryDsl;
     @Autowired
@@ -50,6 +51,11 @@ public class SpringbootJpaDSLTests {
     @Test
     public void getFileList() {
         List<SysUsersRole> list = sysUsersRepositoryService.getFileList();
+        list.forEach(one-> System.out.println(one.toString()));
+    }
+    @Test
+    public void findUserInfo() {
+        List<SysAuthority> list = sysAuthorityRepository.findUserInfo("20190527160213_BABD6598EF59414D9B70424468DB0753");
         list.forEach(one-> System.out.println(one.toString()));
     }
 
