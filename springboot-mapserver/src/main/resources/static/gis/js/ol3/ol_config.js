@@ -1,7 +1,10 @@
+
+
+
 var mapConfig = {
     aMapOfflineUrl: 'http://172.18.121.5:8090/map.ashx?t=test&x={x}&y={y}&z={z}', //高德离线平面地图（测试服）
     aMapOfflineVisible: false, //是否显示
-    aMapSateliteOfflineUrl: 'http://127.0.0.1:8090/map.ashx?t=mapList&x={x}&y={y}&z={z}', //高德离线卫星地图（测试服）
+    aMapSateliteOfflineUrl: 'http://127.0.0.1:8090/map.ashx?t=amap&x={x}&y={y}&z={z}', //高德离线卫星地图（测试服）
     aMapSateliteOfflineVisible: true, //是否显示
     aMapUrl: 'http://webrd04.is.autonavi.com/appmaptile?x={x}&y={y}&z={z}&lang=zh_cn&size=1&scale=1&style=7', //高德平面地图（官方）
     aMapVisible: false, //是否显示
