@@ -323,7 +323,7 @@ public class SysUsersRepositoryServiceImpl implements SysUsersRepositoryService 
                 /*  .from(sysRole,sysUsersRole)//构建两表笛卡尔集
                   .where(sysRole.guid.eq(sysUsersRole.roleId).and(sysUsersRole.userId.eq("20190527160213_BABD6598EF59414D9B70424468DB0753")))//关联两表
                  */ .from(sysAuthority, (EntityPath<?>) ss)
-                .leftJoin(query,dd).on(ss.);
+                .leftJoin(query,dd);
 
 
 

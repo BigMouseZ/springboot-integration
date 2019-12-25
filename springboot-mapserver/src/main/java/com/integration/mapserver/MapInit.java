@@ -114,11 +114,11 @@ public class MapInit implements ApplicationListener<ContextRefreshedEvent> {
             } else {
                 System.out.println("地图模式：访问数据库！");
             }
-
             return true;
         } catch (Exception ex) {
             ex.printStackTrace();
             return false;
         }
     }
+
 }
