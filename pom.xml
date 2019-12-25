@@ -23,6 +23,8 @@
         <module>springboot-javapattern</module>
         <module>springboot-cms</module>
         <module>springboot-jpa</module>
+        <module>springboot-quartz</module>
+        <module>springboot-sqlite</module>
     </modules>
 
 
