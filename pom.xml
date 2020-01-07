@@ -25,6 +25,8 @@
         <module>springboot-jpa</module>
         <module>springboot-quartz</module>
         <module>springboot-sqlite</module>
+        <module>springboot-netty</module>
+
     </modules>
 
 
