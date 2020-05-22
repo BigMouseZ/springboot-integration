@@ -26,7 +26,7 @@
         <module>springboot-quartz</module>
         <module>springboot-sqlite</module>
         <module>springboot-netty</module>
-
+        <module>springboot-mq</module>
     </modules>
 
 
