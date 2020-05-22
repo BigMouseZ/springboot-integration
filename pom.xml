@@ -21,6 +21,12 @@
         <module>springboot-lambda</module>
         <module>springboot-webservice</module>
         <module>springboot-javapattern</module>
+        <module>springboot-cms</module>
+        <module>springboot-jpa</module>
+        <module>springboot-quartz</module>
+        <module>springboot-sqlite</module>
+        <module>springboot-netty</module>
+        <module>springboot-mq</module>
     </modules>
 
 

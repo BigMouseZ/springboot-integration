@@ -2,6 +2,7 @@
 /springbootutil/
 /springboot_mybatis/
 /LOG_PATH_IS_UNDEFINED/
+/log/
 ### IntelliJ IDEA ###
 .idea
 *.iws

@@ -3,13 +3,13 @@ package com.integration.mappackage.service.impl;
 import com.integration.mappackage.dao.GmapnetcacheMapper;
 import com.integration.mappackage.service.MapPackageService;
 import lombok.SneakyThrows;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import javax.annotation.Resource;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
@@ -44,7 +44,7 @@ public class MapPackageServiceImpl implements MapPackageService {
     @Value("${datasource_password}")
     private String datasource_password;
 
-    @Autowired
+    @Resource
     GmapnetcacheMapper gmapnetcacheMapper;
     @SneakyThrows
     @Override
@@ -61,12 +61,12 @@ public class MapPackageServiceImpl implements MapPackageService {
         ResultSet rs = state.executeQuery(sql);
         System.out.println("读取数据库耗时："+(System.currentTimeMillis()-start)/1000);
         // 打开一个随机访问文件流，按读写方式
-        RandomAccessFile randomFile = new RandomAccessFile("E:\\mapcache\\"+ pak_name+".pak", "rw");
+        RandomAccessFile randomFile = new RandomAccessFile("D:\\mapcache\\"+ pak_name+".pak", "rw");
 
         // 创建解析器工厂
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder db = factory.newDocumentBuilder();
-        Document document = db.newDocument();
+        Document  document = db.newDocument();
         document.setXmlStandalone(true);
         Element root=document.createElement("map");
         document.appendChild(root);
@@ -114,7 +114,7 @@ public class MapPackageServiceImpl implements MapPackageService {
         // 输出内容是否使用换行
         tf.setOutputProperty(OutputKeys.INDENT, "yes");
         // 创建xml文件并写入内容
-        tf.transform(new DOMSource(document), new StreamResult(new File("E:\\mapcache\\"+ pak_name+".idx")));
+        tf.transform(new DOMSource(document), new StreamResult(new File("D:\\mapcache\\"+ pak_name+".idx")));
         rs.close();
         state.close();
         conn.close();

@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.integreation.cms.cmsdao.UsersMapper">
+    <resultMap id="BaseResultMap" type="com.integreation.cms.entity.cms.cmsentity.UsersEntity">
+        <id column="guid" property="guid" jdbcType="VARCHAR"/>
+        <result column="login_name" property="loginName" jdbcType="VARCHAR"/>
+        <result column="real_name" property="realName" jdbcType="VARCHAR"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="sex" property="sex" jdbcType="VARCHAR"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="head_icon" property="headIcon" jdbcType="VARCHAR"/>
+        <result column="login_pwd" property="loginPwd" jdbcType="VARCHAR"/>
+        <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP"/>
+        <result column="add_time" property="addTime" jdbcType="TIMESTAMP"/>
+        <result column="organization_id" property="organizationId" jdbcType="VARCHAR"/>
+        <result column="user_state" property="userState" jdbcType="VARCHAR"/>
+        <result column="user_position" property="userPosition" jdbcType="INTEGER"/>
+        <result column="job_number" property="jobNumber" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        guid,login_name,real_name,phone,sex,address,head_icon,login_pwd,modify_time,add_time,user_state,user_position,job_number
+    </sql>
+
+    <!-- 公用查询条件语句块 -->
+    <sql id="selectSql">
+        <if test="guid != null and guid != ''">
+            <![CDATA[and  guid = #{guid,jdbcType=VARCHAR}]]>
+        </if>
+        <if test="loginName != null and loginName != ''">
+            <![CDATA[and  login_name = #{loginName,jdbcType=VARCHAR}]]>
+        </if>
+        <if test="realName != null and realName != ''">
+            <![CDATA[ and  real_name  like '%${realName}%']]>
+        </if>
+        <if test="organizationId !=null and organizationId!=''">
+            <![CDATA[ and organization_id = #{organizationId,jdbcType=VARCHAR} ]]>
+        </if>
+        <if test="userState !=null and userState!=''">
+            <![CDATA[ and user_state = #{userState,jdbcType=VARCHAR} ]]>
+        </if>
+        <if test="userPosition != null ">
+            <![CDATA[ and  user_position  = #{userPosition,jdbcType=INTEGER}]]>
+        </if>
+    </sql>
+
+    <sql id="selectPageSql">
+        <if test="guid != null and guid != ''">
+            <![CDATA[and  guid = #{guid,jdbcType=VARCHAR}]]>
+        </if>
+        <if test="loginName != null and loginName != ''">
+            <![CDATA[and  login_name like '%${loginName}%']]>
+        </if>
+        <if test="realName != null and realName != ''">
+            <![CDATA[ and  real_name  like '%${realName}%']]>
+        </if>
+        <if test="roleId != null and roleId != '' ">
+            <![CDATA[ and  guid  in(select user_id from sys_users_role where role_id = '${roleId}')]]>
+        </if>
+        <if test="userPosition != null ">
+            <![CDATA[ and  user_position  = #{userPosition,jdbcType=INTEGER}]]>
+        </if>
+        <if test="uiview != null and uiview != ''">
+            <![CDATA[and  guid != #{uiview,jdbcType=VARCHAR}]]>
+        </if>
+    </sql>
+
+
+    <select id="listAllByCondition" parameterType="com.integreation.cms.entity.cms.cmsentity.UsersEntity" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/> from sys_users
+        <where>
+            <include refid="selectPageSql"></include>
+        </where>
+        order by modify_time desc
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.integreation.cms.entity.cms.cmsentity.UsersEntity">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_users
+        where guid = #{userId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sys_users
+    where guid = #{userId,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insertSelective" parameterType="com.integreation.cms.entity.cms.cmsentity.UsersEntity">
+        insert into sys_users
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="guid != null">
+                guid,
+            </if>
+            <if test="loginName != null">
+                login_name,
+            </if>
+            <if test="realName != null">
+                real_name,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="address != null">
+                address,
+            </if>
+            <if test="headIcon != null">
+                head_icon,
+            </if>
+            <if test="loginPwd != null">
+                login_pwd,
+            </if>
+            <if test="userState != null">
+                user_state,
+            </if>
+            <if test="userPosition != null">
+                user_position,
+            </if>
+            add_time,
+            modify_time,
+            <if test="jobNumber != null">
+                job_number,
+            </if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="guid != null">
+                #{guid,jdbcType=VARCHAR},
+            </if>
+            <if test="loginName != null">
+                #{loginName,jdbcType=VARCHAR},
+            </if>
+            <if test="realName != null">
+                #{realName,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="headIcon != null">
+                #{headIcon,jdbcType=VARCHAR},
+            </if>
+            <if test="loginPwd != null">
+                #{loginPwd,jdbcType=VARCHAR},
+            </if>
+            <if test="userState != null">
+                #{userState,jdbcType=VARCHAR},
+            </if>
+            <if test="userPosition != null">
+                #{userPosition,jdbcType=INTEGER} ,
+            </if>
+            now(),
+            now(),
+            <if test="jobNumber != null">
+                #{jobNumber,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.integreation.cms.entity.cms.cmsentity.UsersEntity">
+        update sys_users
+        <set>
+            <if test="loginName != null">
+                login_name = #{loginName,jdbcType=VARCHAR},
+            </if>
+            <if test="realName != null">
+                real_name= #{realName,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                phone =#{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="headIcon != null">
+                head_icon = #{headIcon,jdbcType=VARCHAR},
+            </if>
+            <if test="loginPwd != null">
+                login_pwd = #{loginPwd,jdbcType=VARCHAR},
+            </if>
+            <if test="userState != null">
+                user_state = #{userState,jdbcType=VARCHAR},
+            </if>
+            <if test="userPosition != null">
+                user_position = #{userPosition,jdbcType=INTEGER} ,
+            </if>
+            modify_time = now(),
+            <if test="jobNumber != null">
+                job_number = #{jobNumber,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where guid = #{guid,jdbcType=VARCHAR}
+    </update>
+
+    <select id="selectCountByLoginName" parameterType="map"
+            resultType="int">
+    select count(1) from DT_USERS where LOGIN_NAME = #{loginName,jdbcType=VARCHAR}
+  </select>
+
+    <select id="selectByLoginName" resultMap="BaseResultMap" parameterType="com.integreation.cms.entity.cms.cmsentity.UsersEntity">
+        select
+        <include refid="Base_Column_List"/>
+        from sys_users
+        <where>
+            <include refid="selectSql"></include>
+        </where>
+        limit 1
+    </select>
+
+
+
+
+</mapper>
