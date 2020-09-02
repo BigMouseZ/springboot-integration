@@ -18,10 +18,15 @@ public class RabbitMqMessageSendService implements MqMessageSendService<BaseMqMe
 
 	@Override
 	public void send(BaseMqMessage message , MessageSendRoutingKey routingkey) {
-		log.debug("开始发送Mq消息数据: key= "+routingkey.getRoutingKey()+" name = "+routingkey.getName());
+		try {
+			log.debug("开始发送Mq消息数据: key= "+routingkey.getRoutingKey()+" name = "+routingkey.getName());
 //		rabbitTemplate.setExchange(exchangeName);
-		rabbitTemplate.convertAndSend(routingkey.getRoutingKey(), message);
-		System.out.println("...............");
+			rabbitTemplate.convertAndSend(routingkey.getRoutingKey(), message);
+			System.out.println("...............");
+		}catch (Exception ex){
+			log.error("",ex);
+		}
+
 	}
 
 }

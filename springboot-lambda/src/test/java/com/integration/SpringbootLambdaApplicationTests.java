@@ -208,4 +208,11 @@ public class SpringbootLambdaApplicationTests {
         return list;
     }
 
+    @Test
+    public void TestSum(){
+
+        List<User> list = initList();
+        System.out.println(list.stream().mapToLong(User::getAge).sum());
+
+    }
 }

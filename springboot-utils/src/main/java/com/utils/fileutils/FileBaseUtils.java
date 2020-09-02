@@ -66,7 +66,7 @@ public class FileBaseUtils {
 	/**
 	 * 保存文件
 	 * @param input	想要保存的文件流
-	 * @param relativeDir 不能为空。保存路径，此路径相对于webroot
+	 * @param relativeDir 不能为空。保存路径，此路径相对于webroot webapp
 	 * @param newfileName 不能为空。定义保存后，承现的文件名。必须带有后缀名。
 	 * @return  成功返回true,失败则抛出IOException
 	 * @throws IOException

@@ -1,19 +1,16 @@
 package com.integration.springbootquartz.job;
 
 import com.integration.springbootquartz.base.BaseJob;
-import org.quartz.DisallowConcurrentExecution;
 import org.quartz.JobDataMap;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import org.quartz.PersistJobDataAfterExecution;
-import org.springframework.stereotype.Component;
 
 /**
  * Created by ZhangGang on 2019/12/25
  */
-@PersistJobDataAfterExecution
-@DisallowConcurrentExecution
-@Component
+//@PersistJobDataAfterExecution
+//@DisallowConcurrentExecution
+//@Component
 public class JobTwo implements BaseJob {
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
