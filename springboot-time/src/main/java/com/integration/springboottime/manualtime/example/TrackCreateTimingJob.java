@@ -24,7 +24,7 @@ public class TrackCreateTimingJob extends BaseTimingJob {
      */
     @Value("${timing.trackVideo.firstDelayedSecond:10}")
     long firstDelayedSecond;
-    @Value("${timing.trackVideo.cycleSecond:30}")
+    @Value("${timing.trackVideo.cycleSecond:10}")
     long cycleSecond;
 
     @Override

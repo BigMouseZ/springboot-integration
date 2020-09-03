@@ -4,7 +4,6 @@ import com.integration.springboottime.manualtime.timing.BaseTimingJob;
 import com.integration.springboottime.manualtime.timing.TimingJobInformation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
@@ -16,7 +15,7 @@ import java.util.Date;
  * 创建时间:2020年4月1日 下午1:58:48
  * 修改时间:2020年4月1日 下午1:58:48
  */
-@Service
+//@Service
 @Slf4j
 public class TrackCreateTimingJob2 extends BaseTimingJob {
     /**
@@ -30,7 +29,7 @@ public class TrackCreateTimingJob2 extends BaseTimingJob {
     @Override
     public void executeJob() {
 
-        log.warn("开始提取视觉轨迹还原所需要的数据,周期" + cycleSecond + "首次等待" + firstDelayedSecond);
+        log.warn("开始提取视觉轨迹还原所需要的数据1212132323,周期" + cycleSecond + "首次等待" + firstDelayedSecond);
         log.info(new Date().toString());
 
     }

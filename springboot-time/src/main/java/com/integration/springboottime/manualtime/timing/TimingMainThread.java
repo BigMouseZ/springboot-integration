@@ -35,7 +35,7 @@ public class TimingMainThread implements Runnable{
 				stopWatch.start();
 				CountDownLatch waitExecute = new CountDownLatch(1);
 				Thread jobth = new Thread(new TimingExecuteThread(waitExecute, timingJob));
-				jobth.setName(timingJob.jobInformation().getKey());
+//				jobth.setName(timingJob.jobInformation().getKey());
 				jobth.start();
 				waitExecute.await();
 				jobth = null;
