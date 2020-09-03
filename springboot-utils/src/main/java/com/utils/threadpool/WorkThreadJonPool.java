@@ -32,7 +32,9 @@ public class WorkThreadJonPool{
     }
     //执行线程的添加
     public void execute(Runnable r){
+
         jobqueue.add(r);
+
     }
     private  class JobWorkerTread extends Thread{
         public void run(){
