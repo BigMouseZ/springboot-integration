@@ -27,6 +27,7 @@
         <module>springboot-sqlite</module>
         <module>springboot-netty</module>
         <module>springboot-mq</module>
+        <module>common-mq</module>
     </modules>
 
 
